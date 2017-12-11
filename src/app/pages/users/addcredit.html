@@ -1,0 +1,14 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+      <em class="ion-ios-close-empty sn-link-close"></em>
+    </button>
+    <h4 class="modal-title" id="myModalLabel">Amount</h4>
+  </div>
+  <div class="modal-body" style="text-align:center">
+    $<input type="number" ng-model="newBudget" style="width:50%">
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info" ng-click="$dismiss();AddCredit(newBudget);" ng-disabled="newBudget == undefined || newBudget == '' || newBudget < 0 || newBudget > 10000">Add</button>
+  </div>
+</div>

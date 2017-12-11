@@ -1,0 +1,48 @@
+<ul class="al-msg-center clearfix">
+  <!-- <li uib-dropdown>
+    <a href uib-dropdown-toggle>
+      <i class="fa fa-bell-o"></i><span>{{total}}</span>
+
+      <div class="notification-ring"></div>
+    </a>
+
+    <div uib-dropdown-menu class="top-dropdown-menu">
+      <i class="dropdown-arr"></i>
+
+      <div class="header clearfix">
+        <strong>Reports</strong>
+        <a href><span ng-click="ReadAll()">Mark All as Read</span></a>
+
+      </div>
+      <div class="msg-list">
+        <a href class="clearfix" ng-repeat="report in reports">
+          <div class="img-area" style="width:100px" title="{{report.reporter_name}}">{{report.reporter_name.substr(0, 10) + '...'}}</div>
+          <div class="msg-area">
+            <div title="{{report.report_content}}">{{report.report_content.substr(0, 20)}}</div>
+            <span am-time-ago="{{ report.report_time }}"></span>
+          </div>
+        </a>
+      </div>
+      <a href="/#/reports">See all Reports</a>
+    </div>
+  </li> -->
+  <li uib-dropdown ng-if="unreads">
+      <a href="/#/conversations" class="msg"><!--<a href class="msg" uib-dropdown-toggle>-->
+      <i class="fa fa-envelope-o"></i>
+      <span>{{unreads.length}}</span>
+      <div class="notification-ring" ng-if="unreads.length > 0"></div>
+    </a>
+    <div uib-dropdown-menu class="top-dropdown-menu">
+      <i class="dropdown-arr"></i>
+      <div class="header clearfix">
+        <strong>Conversations</strong>
+      </div>
+      <div class="msg-list">
+        <div class="clearfix" style="padding:5px" ng-repeat="unread in unreads" ng-click="OpenConv(unread.post_id)">
+          <a>Conv{{$index+1}}</a><span am-time-ago="{{unread.ti}}" style="float:right;"/>
+        </div>
+      </div>
+      <a href="/#/conversations">See all</a>
+    </div>
+  </li>
+</ul>

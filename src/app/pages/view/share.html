@@ -1,0 +1,16 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+      <em class="ion-ios-close-empty sn-link-close"></em>
+    </button>
+    <h4 class="modal-title" id="myModalLabel">Email to friend</h4>
+  </div>
+  <div class="modal-body">
+    <input type="text" placeholder="Recipient's email address" ng-model="email_to" style="width:100%" maxlength="40">
+    <textarea type="text" ng-model="email_content" placeholder="Add a message" maxlength="1000" style="width:100%;min-height:200px"></textarea>
+    <span style="line-height:30px;font-size:12px;">Remaining: {{1000 - email_content.length}}</span>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info" ng-click="$dismiss();OnShare(email_to, email_content);" ng-disabled="email_to == undefined || email_to == '' || email_content == undefined || email_content == '' || !validateEmail(email_to)">Send</button>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="auth-main">
+  <div class="auth-block">
+    <h1>Forgot password</h1>
+    <a class="auth-link">Input your email.</a>
+    <form class="form-horizontal animated fadeInUp" ng-controller="ForgetController">
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <input class="form-control" placeholder="Email Address" ng-model="email">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <button type="submit" class="btn btn-info btn-auth" ng-click="OnSendEmail()">Send Code</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <span style="color:red">{{result}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <input class="form-control" placeholder="Verification code" ng-model="verifycode">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <input type="password" class="form-control" id="inputPassword3" placeholder="New Password" ng-model="newpwd" minlength="3">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <input type="password" class="form-control" id="inputPassword4" placeholder="Confirm Password" ng-model="newpwdconfirm" minlength="3">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <span style="color:red">{{result2}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <button type="submit" class="btn btn-info btn-auth" ng-click="OnChangePwd()">Reset Password</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

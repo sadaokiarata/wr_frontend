@@ -1,0 +1,36 @@
+<div class="auth-main" ng-controller="Step3Controller">
+  <div class="auth-full">
+    <div class="row" style="margin-bottom:40px">
+      <div class="col-md-offset-1 col-md-3 label-default" style="text-align:center;margin-right:5px;padding:10px;color:lightgrey" ng-click="">Step 1: Ad Information</div>
+      <div class="col-md-3 label-default" style="text-align:center;margin-right:5px;padding:10px;color:lightgrey" ng-click="">Step 2: Preview Post</div>
+      <div class="col-md-3 label-info" style="text-align:center;margin-right:5px;padding:10px;color:white" ng-click="">Step 3: Payment</div>
+    </div>
+    <h1>{{ad.state_name}} > {{ad.city_name}} > {{ad.category_name}}</h1>
+    <div class="col-md-offset-3 col-md-6 animated fadeIn">
+      <hr/>
+      <div class="form-group">
+        <h5>Posting In This Category: ${{ad.category_credit / 100 | number:2}}</h5>
+        <h5>Posting In This City: ${{ad.city_credit / 100 | number:2}}</h5>
+        <h5 ng-if="ad.money_movetotop>0">Move To Top: ${{ad.money_movetotop / 100 | number:2}}</h5>
+        <h5 ng-if="ad.money_autorepost>0">Auto Repost: ${{ad.money_autorepost / 100 | number:2}}</h5>
+        <h5 ng-if="ad.money_premium">Premium: ${{ad.money_premium / 100 | number:2}}</h5>
+        <h5>Credit: ${{budget / 100 | number:2}}</h5>
+        <h5 ng-if="balance<0">Balance Due: ${{-balance / 100 | number:2}}</h5>
+        <h5 ng-if="balance>=0">Remaining Credits: ${{balance / 100 | number:2}}</h5>
+      </div>
+      <hr/>
+      <div class="form-group">
+        <center>
+          <!--<h5>Credit Card Information</h5>
+          <span>Card Number</span>-->
+          <img src="">
+        </center>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <button type="submit" class="btn btn-info btn-auth" ng-click="OnOK()">Complete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

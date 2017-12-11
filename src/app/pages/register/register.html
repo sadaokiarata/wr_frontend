@@ -1,0 +1,58 @@
+<div class="auth-main">
+  <div class="auth-block">
+    <h1 class="animated bounceInDown">Sign up</h1>
+    <form class="form-horizontal animated zoomIn" ng-controller="RegisterController">
+      <!-- <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <input type="text" class="form-control" id="inputName3" placeholder="Full Name">
+        </div>
+      </div> -->
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <input type="email" class="form-control" id="email" placeholder="Email Address" ng-model="userEmail" data-placement="right" data-content="Input valid email" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <input type="password" class="form-control" id="password" placeholder="Password" ng-model="userPwd" minlength="3" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <input type="password" class="form-control" id="passwordConfirm" placeholder="Confirm Password" ng-model="userPwdConfirm" required minlength="3">
+          <span style="color:red">{{result}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <div class="">
+            <h3 style="text-align:center"><a>Terms and Conditions</a></h3>
+            All advertiser content contained in his web site are provided to Whorub.com by individuals for the purpose of paid advertisements and are the sole responsibility of
+            the individual advertisers. Whorub.com assumes no responsibility for any claims arising from advertising.<br><br>
+            <strong>Are you at least 18 years old and do you accept Terms and Conditions above.</strong>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-offset-3 col-xs-3">
+          <label class="radio-inline custom-radio nowrap">
+            <input type="radio" ng-value="true" ng-model="sel">
+            <span>Yes</span>
+          </label>
+        </div>
+        <div class="col-xs-3">
+          <label class="radio-inline custom-radio nowrap">
+            <input type="radio" ng-value="false" ng-model="sel" checked>
+            <span>No</span>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+           <!-- <a href="/register2"></a>  -->
+          <button type="submit" class="btn btn-info btn-auth" ng-click="OnRegister()" ng-disabled="!sel">Register</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

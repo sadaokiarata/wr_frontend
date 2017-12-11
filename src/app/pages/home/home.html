@@ -1,0 +1,92 @@
+<div class="auth-main" ng-controller="HomeController">
+  <div class="auth-full">
+    <div class="col-md-offset-2 col-md-8" id="mainfield"><!--whole main start -->
+      <div class="input-group ng-scope">
+        <input type="text" class="form-control with-danger-addon" placeholder="Search for..." ng-model="searchText">
+        <span class="input-group-btn">
+            <button class="btn btn-info" type="button" title="search" ng-click="OnPage(-1)"><i class="fa fa-search"/></button>
+        </span>
+      </div>
+      <h1>{{city.state_name}} / {{city.city_name}}</h1>
+      <div class="row" style="text-align:center;margin-bottom:20px">
+        <button class="btn btn-info" ng-click="SelLocation()">Different City</button>
+      </div>
+      <div class="row" style="margin-bottom:20px">
+        <div ng-class="{'col-lg-1': logined}"></div>
+        <div class="col-md-6" ng-class="{'col-lg-3':!logined, 'col-lg-2':logined}" ng-repeat="category in categories" style="height:80px;padding:0px;border:1px white solid">
+          <div class="col-sm-12 label" style="text-align:center;font-size:18px;cursor:pointer;color:#2dacd1;height:100%;vertical-align:middle;align-items:center;justify-content:center;display:flex;white-space:pre-wrap"
+              ng-class="{'animated swing':$index==categoryId}"
+              ng-style="$index==categoryId? {'background':'#2dacd1', color:'white'}:{'background':'lightgrey'}" title="{{category.category_name}}" ng-click="SelCategory($index)">{{category.category_name}}</div>
+        </div>
+      </div>
+      <div class="input-group ng-scope animated fadeInRight" ng-if="categoryId<categories.length-1">
+        <div class="col-md-2" ng-repeat="premium in premiums" style="background:lightgray;padding:0px;border:1px solid white">
+          <a href="/#/view/{{premium.post_id}}">
+            <div style="position:relative;padding-top:100%;width:100%">
+              <div style="position:absolute;top:0;left:0;right:0;left:0;height:100%">
+                <img ng-src="{{'https://localhost:3009/advertisements/' + premium.post_id + '/image/0'}}" style="height:100%;width:100%;object-fit:cover;position:absolute;">
+              </div>
+            </div>
+            <div style="text-align:center;overflow:hidden;height:30px">{{premium.post_title}}</div>
+          </a>
+        </div>
+      </div>
+      <!--<div class="form-group row" style="visibility:collapse">
+        <div ba-panel ba-panel-title="Leaflet" class="viewport100">
+          <div id="leaflet-map"></div>
+        </div>
+      </div>-->
+      <!--<div class="input-group ng-scope">
+        <div ng-if="viewMode==0">Brief view&nbsp;|&nbsp;<a ng-click="ChangeViewMode(1)">Detailed view</a></div>
+        <div ng-if="viewMode==1"><a ng-click="ChangeViewMode(0)">Brief view</a>&nbsp;|&nbsp;Detailed view</div>
+      </div>-->
+      <div ng-repeat-start="ad in ads" class="input-group ng-scope" ng-show="ad.show_date" ng-if="categoryId!=categories.length-1">{{ad.short_date}}</div>
+      <div ng-repeat-end class="ng-scope animated fadeIn" ng-if="categoryId!=categories.length-1">
+        <div ng-if="viewMode==0" style="height:200px;border:1px solid grey">
+          <div class="col-md-9" style="height:100%;background:lightgrey;word-break:break-all;overflow:hidden;padding:10px">
+            <a href="#/view/{{ad.post_id}}" class="form-control-static">{{ad.post_title}}</a><br>
+            {{ad.post_desc}}
+          </div>
+          <div class="col-sm-12 col-md-3" style="height:100%;padding:0px">
+            <a href="#/view/{{ad.post_id}}"><img ng-src="{{'https://localhost:3009/advertisements/' + ad.post_id + '/image/0'}}" style="height:100%;width:100%;object-fit:cover"></a>
+          </div>
+        </div>
+        <!--
+        <div ng-if="viewMode==1" class="row">
+          <div class="col-md-2">
+            <img ng-src="{{'https://localhost:3009/advertisements/' + ad.post_id + '/image/0'}}" style="max-height:40px;max-width:100%">
+          </div>
+          <div class="col-md-10" style="overflow:hidden;">
+            <a href="view/{{ad.post_id}}" class="form-control-static">{{ad.post_title}}</a><br>
+            {{ad.post_desc}}
+          </div>
+        </div>
+        -->
+      </div>
+      <div ng-if="categoryId==categories.length-1">
+        <button class="btn btn-sm btn-info" style="margin-bottom:10px" ng-click="OpenWindow('app/pages/home/writedlg.html', 'md', -1)">Add my review</button>
+        <div class="form-group row animated fadeIn" ng-repeat="review in reviews">
+          <div class="form-group" style="border:1px solid;padding:10px">
+            <strong>{{review.review_title}}</strong>
+            <i class="fa fa-thumbs{{review.you_like?'':'-o'}}-up" style="padding:5px;color:blue;cursor:pointer" ng-click="OnLike($index, true)" title="I Like">  {{review.like}}</i>
+            <i class="fa fa-thumbs{{review.you_dislike?'':'-o'}}-down" style="padding:5px;color:red;cursor:pointer" ng-click="OnLike($index, false)" title="I Dislike">  {{review.dislike}}</i>
+            <button class="btn btn-danger" ng-click="DeleteReview(review.review_id)" title="Delete" style="float:right">-</button>
+            <button class="btn btn-info" ng-click="OpenWindow('app/pages/reviews/writedlg.html', 'md', review.review_id)" title="Reply" style="float:right">+</button>
+            <br>Posted by <strong>{{review.sender_name}}</strong>({{review.review_time}})
+            <div style="margin:10px;white-space:pre">{{review.review_content}}</div>
+            <div style="margin-left:20px;border-top:1px solid;padding:10px" ng-repeat="child in review.children">
+                <strong>{{child.review_title}}</strong>
+                <br>({{child.review_time}})
+              <div style="margin:10px;white-space:pre">{{child.review_content}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" style="text-align:center">
+        <div paging page="currentPage+1" page-size="pageSize" total="total"
+            show-prev-next="true" show-first-last="true" paging-action="OnPage(page-1)"></div>
+        <div>Totals: {{total}}</div>
+      </div>
+    </div><!--whole main end -->
+  </div>
+</div>

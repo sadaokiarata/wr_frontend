@@ -1,0 +1,105 @@
+<div class="auth-main" ng-controller="Step2Controller">
+  <div class="auth-full">
+    <div class="row" style="margin-bottom:40px">
+      <div class="col-md-offset-1 col-md-3 label-default" style="text-align:center;margin-right:5px;padding:10px;color:lightgrey" ng-click="">Step 1: Ad Information</div>
+      <div class="col-md-3 label-info" style="text-align:center;margin-right:5px;padding:10px;color:white" ng-click="">Step 2: Preview Post</div>
+      <div class="col-md-3 label-default" style="text-align:center;margin-right:5px;padding:10px;color:lightgrey" ng-click="">Step 3: Payment</div>
+    </div>
+    <h1>{{ad.state_name}} > {{ad.city_name}} > {{ad.category_name}}</h1>
+    <div class="col-md-offset-3 col-md-6">
+      <div class="form-group animated fadeIn">
+        <div class="panel panel-default bootstrap-panel">
+          <div class="panel-body" style="position:relative">
+            <div class="col-lg-4" style="border: 1px white solid">
+              <div class="row" style="text-align:center">
+                <img ng-src="{{'https://localhost:3009/advertisements/' + ad.post_id + '/image/0'}}" style="width:100%" ng-click="uploadPicture()">
+              </div>
+              <div class="row">
+                <button class="col-md-4 btn btn-sm btn-primary">Message</button>
+                <button class="col-md-4 btn btn-sm btn-info">Share</button>
+                <button class="col-md-4 btn btn-sm btn-danger" ng-click="OpenWindow('app/pages/view/reportdlg.html', 'md')">Report</button>
+              </div>
+            </div>
+            <div class="col-lg-8" style="min-height: 200px">
+              <div class="form-group" ng-if="ad.category_name!='Massage'"><strong>Ad Name: {{ad.post_name}}</strong></div>
+              <div class="form-group"><span>{{ad.post_title}}</span></div>
+              <br/><br/>
+              <div class="form-group"><span>Address: {{ad.addr}}</span></div>
+              <div class="form-group"><span>Website: <a href="{{ad.url}}">{{ad.url}}</a></span></div>
+              <!--<div class="form-group"><span ng-if="ad.show_email==1">Email: {{ad.email}}</span></div>-->
+              <div class="form-group"><span>Posted: {{ad.post_time}}</span></div>
+              <div class="form-group"><span>Last Posted: {{ad.repost_time}}</span></div>
+              <div class="form-group"><span>Repost count: {{ad.repost_count}}</span></div>
+              <div class="form-group"><span>Repost interval: {{ad.repost_interval}} Hours</span></div>
+              <div class="form-group"><button class="btn btn-sm btn-warning" ng-click="ManualRepost()" ng-disabled="ad.repost_count <= 0">Move ad to top</button>
+              <ba-switcher switcher-style="info" switcher-value="ad.opened"
+                  ng-mousedown="OnOpen(!ad.opened)" style="position:absolute;right:0px;bottom:0px"></ba-switcher>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="form-group" style="white-space:pre">{{ad.post_desc}}</div>
+      <hr/>
+      <div class="form-group">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:300px">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+              <li data-target="#myCarousel" data-slide-to="3"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+              <div class="item active" style="height:300px">
+                <img ng-src="{{'https://localhost:3009/advertisements/'+ad.post_id+'/image/1'}}" style="height:100%;width:100%;object-fit:contain">
+              </div>
+              <div class="item" style="height:300px">
+                <img ng-src="{{'https://localhost:3009/advertisements/'+ad.post_id+'/image/2'}}" style="height:100%;width:100%;object-fit:contain">
+              </div>
+              <div class="item" style="height:300px">
+                <img ng-src="{{'https://localhost:3009/advertisements/'+ad.post_id+'/image/3'}}" style="height:100%;width:100%;object-fit:contain">
+              </div>
+              <div class="item" style="height:300px">
+                <img ng-src="{{'https://localhost:3009/advertisements/'+ad.post_id+'/image/4'}}" style="height:100%;width:100%;object-fit:contain">
+              </div>
+            </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="/#/step2#myCarousel" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="/#/step2#myCarousel" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="item col-md-3 active" style="height:100px">
+            <img ng-src="{{'https://localhost:3009/advertisements/' + ad.post_id + '/image/1'}}" style="width:100%;height:100%;object-fit:contain">
+          </div>
+          <div class="item col-md-3" style="height:100px">
+            <img ng-src="{{'https://localhost:3009/advertisements/' + ad.post_id + '/image/2'}}" style="width:100%;height:100%;object-fit:contain">
+          </div>
+          <div class="item col-md-3" style="height:100px">
+            <img ng-src="{{'https://localhost:3009/advertisements/' + ad.post_id + '/image/3'}}" style="width:100%;height:100%;object-fit:contain">
+          </div>
+          <div class="item col-md-3" style="height:100px">
+            <img ng-src="{{'https://localhost:3009/advertisements/' + ad.post_id + '/image/4'}}" style="width:100%;height:100%;object-fit:contain">
+          </div>
+        </div>
+      <div class="form-group row">
+        <div class="viewport100">
+          <div id="leaflet-map" style="height:200px"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row" style="margin-top:50px">
+          <a href="/#/step3"><button type="submit" class="btn btn-info btn-auth">Next</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,314 @@
+<div class="auth-main" ng-controller="Step1Controller">
+  <div class="auth-full">
+    <div class="row" style="margin-bottom:40px">
+      <div class="col-md-offset-1 col-md-3 label-info" style="text-align:center;margin-right:5px;padding:10px;color:white" ng-click="">Step 1: Ad Information</div>
+      <div class="col-md-3 label-default" style="text-align:center;margin-right:5px;padding:10px;color:lightgrey" ng-click="">Step 2: Preview Post</div>
+      <div class="col-md-3 label-default" style="text-align:center;margin-right:5px;padding:10px;color:lightgrey" ng-click="">Step 3: Payment</div>
+    </div>
+    <h1>{{ad.state_name}} > {{ad.city_name}} > {{ad.category_name}}</h1>
+    <div class="col-md-offset-3 col-md-6 animated zoomIn" id="mainfield">
+      <!--whole main start -->
+      <h3 style="text-align:center;">AD Information</h3>
+      <div class="form-group">
+        <label>Postings in this category are ${{ad.category_credit / 100}}</label><br>
+        <label>Postings in this city are ${{ad.city_credit / 100}}</label>
+      </div>
+      <div class="form-group" ng-if="ad.category_name!='Massage'">
+        <label for="input01">Name:<span style="color:#e85656">*</span></label>
+        <input type="text" class="form-control" placeholder="Name" maxlength="30" minlength="3" ng-model="ad.post_name" value="Default Name"
+          style="background:white" required>
+        <span class="col-sm-offset-1" style="line-height:30px;font-size:12px;">Remaining: {{30 - ad.post_name.length}}</span>
+      </div>
+      <div class="form-group">
+        <label for="input01">Title:<span style="color:#e85656">*</span></label>
+        <input type="text" class="form-control" placeholder="Title" maxlength="100" ng-model="ad.post_title" value="Default Title"
+          style="background:white" required>
+        <span class="col-sm-offset-1" style="line-height:30px;font-size:12px;">Remaining: {{100 - ad.post_title.length}}</span>
+      </div>
+      <div class="form-group">
+        <label for="textarea01">Description:<span style="color:#e85656">*</span></label></label>
+        <textarea placeholder="Description" class="form-control" id="textarea01" ng-model="ad.post_desc" value="Default Desc" 
+          style="background:white" maxlength="500" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="input01">Website URL:</label>
+        <input type="text" class="form-control" placeholder="http://www.xyz.com" maxlength="50" ng-model="ad.url"
+          style="background:white">
+      </div>
+      <div class="form-group">
+        <label for="input01">Contact Phone:</label>
+        <input type="text" class="form-control" placeholder="Contact Phone" maxlength="20" ng-model="ad.phone"
+          style="background:white">
+      </div>
+      <div class="form-group">
+        <label for="input01">Contact Method:</label>
+        <div class="input-demo radio-demo row">
+          <div class="col-md-offset-1 col-md-3">
+            <label class="radio-inline custom-radio nowrap">
+              <input type="radio" ng-model="ad.contact_method" value="0" checked>
+              <span>Call</span>
+            </label>
+          </div>
+          <div class="col-md-3">
+            <label class="radio-inline custom-radio nowrap">
+              <input type="radio" ng-model="ad.contact_method" value="1">
+              <span>Text</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <!--
+      <div class="form-group">
+        <label for="input01">Email:</label>
+        <input type="email" class="form-control" placeholder="Email" maxlength="100" ng-model="ad.email" style="background:white">
+      </div>
+      <div class="form-group">
+        <label for="input01">Hide my Email:</label>
+        <div class="input-demo radio-demo row">
+          <div class="col-md-offset-1 col-md-3">
+            <label class="radio-inline custom-radio nowrap">
+              <input type="radio" ng-model="ad.show_email" value="0" checked>
+              <span>Yes</span>
+            </label>
+          </div>
+          <div class="col-md-3">
+            <label class="radio-inline custom-radio nowrap">
+              <input type="radio" ng-model="ad.show_email" value="1">
+              <span>No</span>
+            </label>
+          </div>
+        </div>
+      </div>-->
+      <hr/>
+      <h3 style="text-align:center;">Location</h3>
+      <div class="form-group">
+        <label for="input01">Provide your location to appear in map view</label>
+      </div>
+      <div class="form-group">
+        <label for="input01">Address:</label>
+        <input type="text" class="form-control" placeholder="Address" maxlength="50" ng-model="ad.addr" style="background:white">
+      </div>
+      <hr/>
+      <form name="uploadForm" id="uploadForm" action="https://localhost:3009/advertisements/33/upload" method="post" encType="multipart/form-data">
+        <h3 style="text-align:center;">Post Profile Image</h3>
+        <div class="form-group">
+          <label for="input01">This image will show up as your profile image</label>
+          <input type="file" id="imgProfile" name="imgProfile" class="form-control" style="background:white"
+            onchange="angular.element(this).scope().ShowFiles(event);angular.element(this).scope().$apply()">
+          <div class="row" style="margin:10px">
+            <div style="height:100px;text-align:center;" class="col-sm-6 col-md-2" ng-if="showProfile">
+              <div style="position:relative;padding-top:100%;width:100%">
+                <div style="position:absolute;top:0;left:0;right:0;left:0;height:100%">
+                  <img img-fix-orientation="showProfile" ng-src="{{showProfile}}" style="height:100%;width:100%;object-fit:contain;border:1px solid blue">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3 style="text-align:center;">Post Image(s)</h3>
+        <div class="form-group">
+          <label for="input01">You may add up to 4 photo(s) to your post. Absolutely no nude or explicit photos. </label>
+          <input type="file" id="imgOther" name="imgOther" class="form-control" style="background:white"
+            multiple onchange="angular.element(this).scope().ShowFiles1(event);angular.element(this).scope().$apply()"><!-- accept="image/*"-->
+          <div class="row" class="margin:10px">
+            <div data-ng-repeat="i in GetOthers()" style="height:100px;text-align:center;" class="col-sm-6 col-md-2">
+              <!--img-fix-orientation="showOthers[i]" -->
+              <div style="position:relative;padding-top:100%;width:100%">
+                <div style="position:absolute;top:0;left:0;right:0;left:0;height:100%">
+                  <img img-fix-orientation="showOthers[i]" ng-src="{{showOthers[i]}}" style="height:100%;width:100%;object-fit:contain;border:1px solid blue">
+                  <div class="btn btn-danger" style="margin:2px" ng-click="RemoveOthers($index)">x</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input type="submit" style="visibility:hidden;">
+      </form>
+      <hr style="clear:both"/>
+      <h3 style="text-align:center;">Move Ad to Top of List</h3>
+      <div class="form-group">
+        <div class="row">
+          <label class="checkbox-inline custom-checkbox nowrap">
+            <input type="checkbox" id="inlineCheckbox01" ng-model="ad.movetotop">
+            <span>Move ad to top of list every hour for the next</span>
+          </label>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <select class="form-control" title="Choose" ng-model="ad.movetotop_times" ng-disabled="!ad.movetotop">
+              <option label="1 Hour" value="1">1 Hour</option>
+              <option label="2 Hours" value="2">2 Hours</option>
+              <option label="3 Hours" value="3">3 Hours</option>
+              <option label="4 Hours" value="4">4 Hours</option>
+              <option label="5 Hours" value="5">5 Hours</option>
+              <option label="6 Hours" value="6">6 Hours</option>
+              <option label="7 Hours" value="7">7 Hours</option>
+              <option label="8 Hours" value="8">8 Hours</option>
+              <option label="9 Hours" value="9">9 Hours</option>
+              <option label="10 Hours" value="10">10 Hours</option>
+              <option label="11 Hours" value="11">11 Hours</option>
+              <option label="12 Hours" value="12">12 Hours</option>
+              <option label="13 Hours" value="13">13 Hours</option>
+              <option label="14 Hours" value="14">14 Hours</option>
+              <option label="15 Hours" value="15">15 Hours</option>
+              <option label="16 Hours" value="16">16 Hours</option>
+              <option label="17 Hours" value="17">17 Hours</option>
+              <option label="18 Hours" value="18">18 Hours</option>
+              <option label="19 Hours" value="19">19 Hours</option>
+              <option label="20 Hours" value="20">20 Hours</option>
+              <option label="21 Hours" value="21">21 Hours</option>
+              <option label="22 Hours" value="22">22 Hours</option>
+              <option label="23 Hours" value="23">23 Hours</option>
+              <option label="24 Hours" value="24">24 Hours</option>
+            </select>
+          </div>
+          <label>starting now for ${{ad.movetotop_times * 2}}.00</label>
+        </div>
+      </div>
+      <hr style="clear:both"/>
+      <h3 style="text-align:center;">Auto Repost Ad</h3>
+      <div class="form-group">
+        <div class="row">
+          <label class="custom-checkbox">
+            <input type="checkbox" id="inlineCheckbox01" ng-model="ad.repost">
+            <span>Move your ad to top of listings every</span>
+          </label>
+          <select class="form-control" title="Choose" ng-model="ad.repost_interval" ng-disabled="!ad.repost" style="display:inline;width:80px;">
+            <option label="1 Day" value="1">1 Day</option>
+            <option label="2 Days" value="2">2 Days</option>
+            <option label="3 Days" value="3">3 Days</option>
+            <option label="4 Days" value="4">4 Days</option>
+            <option label="5 Days" value="5">5 Days</option>
+            <option label="6 Days" value="6">6 Days</option>
+            <option label="7 Days" value="7">7 Days</option>
+            <option label="8 Days" value="8">8 Days</option>
+            <option label="9 Days" value="9">9 Days</option>
+            <option label="10 Days" value="10">10 Days</option>
+            <option label="11 Days" value="11">11 Day</option>
+            <option label="12 Days" value="12">12 Days</option>
+            <option label="13 Days" value="13">13 Days</option>
+            <option label="14 Days" value="14">14 Days</option>
+            <option label="15 Days" value="15">15 Days</option>
+            <option label="16 Days" value="16">16 Days</option>
+            <option label="17 Days" value="17">17 Days</option>
+            <option label="18 Days" value="18">18 Days</option>
+            <option label="19 Days" value="19">19 Days</option>
+            <option label="20 Days" value="20">20 Days</option>
+            <option label="21 Days" value="21">21 Day</option>
+            <option label="22 Days" value="22">22 Days</option>
+            <option label="23 Days" value="23">23 Days</option>
+            <option label="24 Days" value="24">24 Days</option>
+            <option label="25 Days" value="25">25 Days</option>
+            <option label="26 Days" value="26">26 Days</option>
+            <option label="27 Days" value="27">27 Days</option>
+            <option label="28 Days" value="28">28 Days</option>
+            <option label="29 Days" value="29">29 Days</option>
+            <option label="30 Days" value="30">30 Days</option>
+          </select><label>&nbsp;after</label>
+          <select class="form-control" title="Opening hours" ng-model="ad.work_hour1" ng-disabled="!ad.repost" style="display:inline;width:100px;">
+            <option label="0:00 AM" value="0">0:00 AM</option>
+            <option label="1:00 AM" value="1">1:00 AM</option>
+            <option label="2:00 AM" value="2">2:00 AM</option>
+            <option label="3:00 AM" value="3">3:00 AM</option>
+            <option label="4:00 AM" value="4">4:00 AM</option>
+            <option label="5:00 AM" value="5">5:00 AM</option>
+            <option label="6:00 AM" value="6">6:00 AM</option>
+            <option label="7:00 AM" value="7">7:00 AM</option>
+            <option label="8:00 AM" value="8">8:00 AM</option>
+            <option label="9:00 AM" value="9">9:00 AM</option>
+            <option label="10:00 AM" value="10">10:00 AM</option>
+            <option label="11:00 AM" value="11">11:00 AM</option>
+            <option label="12:00 AM" value="12">12:00 NOON</option>
+            <option label="1:00 PM" value="13">1:00 PM</option>
+            <option label="2:00 PM" value="14">2:00 PM</option>
+            <option label="3:00 PM" value="15">3:00 PM</option>
+            <option label="4:00 PM" value="16">4:00 PM</option>
+            <option label="5:00 PM" value="17">5:00 PM</option>
+            <option label="6:00 PM" value="18">6:00 PM</option>
+            <option label="7:00 PM" value="19">7:00 PM</option>
+            <option label="8:00 PM" value="20">8:00 PM</option>
+            <option label="9:00 PM" value="21">9:00 PM</option>
+            <option label="10:00 PM" value="22">10:00 PM</option>
+            <option label="11:00 PM" value="23">11:00 PM</option>
+          </select>
+        </div>
+        
+        <label>Number of times</label>
+        <select class="form-control" title="Choose" ng-model="ad.repost_count" ng-disabled="!ad.repost" style="display:inline;width:200px">
+          <option label="1 time for ${{1}}" value="1">1 Time</option>
+          <option label="5 times for ${{5}}" value="5">5 Times</option>
+          <option label="10 times for ${{10}}" value="10">10 Times</option>
+          <option label="20 times for ${{20}}" value="20">20 Times</option>
+          <option label="50 times for ${{50}}" value="50">50 Times</option>
+          <option label="100 times for ${{100}}" value="100">100 Times</option>
+          <option label="500 times for ${{500}}" value="500">500 Times</option>
+        </select>
+      </div>
+      <hr/>
+      <h3 style="text-align:center;">Recommended Upgrades</h3>
+      <div class="form-group">
+        <h6><label class="checkbox-inline custom-checkbox nowrap">
+          <input type="checkbox" id="inlineCheckbox01" ng-model="ad.premium_open">
+          <span><strong>Premium Post (${{premium_price / 100}} for 30 Days)</strong></span>
+        </label></h6>
+      </div>
+      <div class="form-group">
+        <img src="assets/img/template.jpg">
+      </div>
+      <div class="form-group">
+        <label>Premium placement on the homepage</label>
+        <div class="form-group">
+          <label for="input01">Select your time period for Premium position:</label>
+          <select class="form-control" title="Choose" style="max-width:300px" ng-disabled="!ad.premium_open" ng-model="ad.premium_period">
+            <option value="1">30 days (${{premium_price / 100}})</option>
+            <option value="2">60 days (${{premium_price * 2 / 100}})</option>
+            <option value="3">90 days (${{premium_price * 3 / 100}})</option>
+            <option value="4">120 days (${{premium_price * 4 / 100}})</option>
+          </select>
+        </div>
+        <!--<div class="form-group">
+          <label for="input01">Automatically repost your ad to the top of the listing after:</label>
+          <select class="form-control" title="Choose" style="max-width:300px" ng-disabled="!ad.premium_open" ng-model="ad.premium_interval">
+            <option label="1 Hour" value="1">1 Hour</option>
+            <option label="2 Hours" value="2">2 Hours</option>
+            <option label="3 Hours" value="3">3 Hours</option>
+            <option label="4 Hours" value="4">4 Hours</option>
+          </select>
+        </div>
+        <h6><strong>Categories - First two are free! ($25 per each additional)</strong></h6>
+        <div class="form-group">
+          <label for="input01">Add additional premium categories for select cities. The first two categories are free:</label>
+        </div>
+        <div class="form-group">
+          <button class="btn" ng-class="{'btn-info':selCategory[$index], 'btn-default':!selCategory[$index]}" 
+            ng-repeat="category in categories" ng-click="SelCategory($index)" ng-disabled="!ad.premium_open">
+              {{category.category_name}}</button>&nbsp;&nbsp;&nbsp;{{selCount}} category(s) are selected.
+        </div>
+        <h6><label class="checkbox-inline custom-checkbox nowrap">
+            <input type="checkbox" id="inlineCheckbox01" value="option1">
+            <span><strong>Priority Top Placement</strong></span>
+          </label>
+        </h6>
+        <div class="form-group">
+          <label for="input01">Appear as a Priority Top Placement for: <strong>1   for $800.00</strong></label>
+        </div>
+        <ul>
+          <li>Your ad will appear in the top <strong>15</strong> listing s for <strong>30 days</strong> every time a viewer accesses the site from any device</li>
+        </ul>-->
+      </div>
+      <div class="auth-sep"></div>
+      <div class="form-group">
+        <label class="checkbox-inline custom-checkbox nowrap">
+          <input type="checkbox" ng-model="bAgreement">
+          <span style="background:yellow;">By placing this ad I agree to terms of use.</span>
+        </label>
+      </div>
+      <div class="form-group">
+        <div class="row" style="margin-top:50px">
+          <button class="btn btn-info btn-auth" ng-disabled="!bAgreement" ng-click="OnOK()">Continue</button>
+        </div>
+      </div>
+    </div>
+    <!--whole main end -->
+  </div>
+</div>

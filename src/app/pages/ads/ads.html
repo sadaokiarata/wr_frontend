@@ -1,0 +1,53 @@
+<div class="auth-main" ng-controller="AdsController">
+  <div class="auth-full">
+    <div class="form-group">
+      <div paging page="currentPage+1" page-size="10" total="total" style="text-align:center"
+          show-prev-next="true" show-first-last="true" paging-action="OnPage(page-1)"></div>
+    </div>
+    <div class="form-group" style="text-align: center">
+      Total: {{total}}
+    </div>
+    <table class="table table-striped tableCu animated fadeIn">
+      <thead>
+        <tr>
+          <!--<th>#</th>-->
+          <th>Date</th>
+          <th>Ad Name</th>
+          <th>Ad Title</th>
+          <th>Location</th>
+          <th>Owner</th>
+          <th>Category</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th ng-hide="!isAdmin">Open/Closed</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="ad in ads">
+          <!--<td>{{10 * currentPage + $index + 1}}</td>-->
+          <td>{{ad.post_time}}</td>
+          <td>{{ad.post_name}}</td>
+          <td>{{ad.post_title}}</td>
+          <td><strong>{{ad.city_name}}</strong></td>
+          <td>{{ad.user_name}}</td>
+          <td>{{ad.category_name}}</td>
+          <td>
+            <div>{{ad.premium_open?"VIP AD":""}}</div>
+          </td>
+          <td>Live</td>
+          <td style="padding-top:5px" ng-hide="!isAdmin">
+            <ba-switcher switcher-style="info" switcher-value="ad.opened" ng-mousedown="OnOpen($index, !ad.opened)"></ba-switcher>
+          </td>
+          <td>
+            <button class="btn btn-primary badge btn-sq" ng-click="GoView($index);">
+              <i class="glyphicon glyphicon-folder-open"/>
+            </button>
+            <button class="btn btn-danger badge btn-sq" ng-click="GoDelete($index);">
+              <i class="glyphicon glyphicon-trash"/>
+            </button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

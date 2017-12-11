@@ -1,0 +1,139 @@
+<div class="auth-main" ng-controller="SelLocationController">
+  <div class="auth-full">
+    <div class="col-md-4" ng-repeat="i in [0,1,2]">
+      <div ng-repeat="j in splits[i]" class="animated zoomIn">
+        <div class="input-group ng-scope" ng-click="locations[j].expanded=!locations[j].expanded">
+          <span class="input-group-addon input-group-addon-info addon-left" id="basic-addon1"/>
+          <label class="form-control" style="font-size:18px;cursor:pointer">{{locations[j].state_name}}</label>
+          <div style="float:right;margin-top:-25px;margin-right:10px;">
+            <i class="glyphicon glyphicon-menu-down" ng-if="!locations[j].expanded"></i>
+            <i class="glyphicon glyphicon-menu-up" ng-if="locations[j].expanded"></i>
+          </div>
+        </div>
+        <div class="input-group ng-scope" style="margin-left:30px;" ng-if="locations[j].expanded">
+          <div ng-repeat="city in locations[j].cities" style="margin-bottom:5px"><a ng-click="SelectCity(j, $index)">{{city.city_name}}</a></div>
+        </div>
+      </div>
+    </div>
+    <!--<div class="col-md-4">
+      <div class="input-group ng-scope">
+        <span class="input-group-addon input-group-addon-info addon-left" id="basic-addon1"></span>
+        <label class="form-control">California</label>
+      </div>
+      <div class="input-group ng-scope" style="margin-left:30px;">
+        <div><a href="/selcategory">Oakland/East Bay</a></div>
+        <div><a href="/selcategory">Frsno</a></div>
+        <div><a href="/selcategory">Long Beach</a></div>
+        <div><a href="/selcategory">Los Angeles</a></div>
+        <div><a href="/selcategory">North Bay</a></div>
+        <div><a href="/selcategory">Orange County</a></div>
+        <div><a href="/selcategory">Palm Spring</a></div>
+        <div><a href="/selcategory">Sacramento</a></div>
+        <div><a href="/selcategory">San Diego</a></div>
+        <div><a href="/selcategory">San Fernando Valley</a></div>
+        <div><a href="/selcategory">San Gabriel Valley</a></div>
+        <div><a href="/selcategory">San Jose</a></div>
+        <div><a href="/selcategory">Stockton</a></div>
+        <div><a href="/selcategory">Ventura</a></div>
+      </div>
+      <div class="input-group ng-scope">
+        <span class="input-group-addon input-group-addon-info addon-left" id="basic-addon1"></span>
+        <label class="form-control">Colorado</label>
+      </div>
+      <div class="input-group ng-scope" style="margin-left:30px;">
+        <div><a href="/selcategory">Colorado Springs</a></div>
+        <div><a href="/selcategory">Denver</a></div>
+      </div>
+      <div class="input-group ng-scope">
+        <span class="input-group-addon input-group-addon-info addon-left" id="basic-addon1"></span>
+        <label class="form-control">Florida</label>
+      </div>
+      <div class="input-group ng-scope" style="margin-left:30px;">
+        <div><a href="/selcategory">Fort Myers</a></div>
+        <div><a href="/selcategory">Jacksonville</a></div>
+        <div><a href="/selcategory">Miami</a></div>
+        <div><a href="/selcategory">Oriando</a></div>
+        <div><a href="/selcategory">Sarasota</a></div>
+        <div><a href="/selcategory">Tampa</a></div>
+        <div><a href="/selcategory">West Palm Beach</a></div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="input-group ng-scope">
+        <span class="input-group-addon input-group-addon-info addon-left" id="basic-addon1"></span>
+        <label class="form-control">Michigan</label>
+      </div>
+      <div class="input-group ng-scope" style="margin-left:30px;">
+        <div><a href="/selcategory">Detroit</a></div>
+      </div>
+      <div class="input-group ng-scope">
+        <span class="input-group-addon input-group-addon-info addon-left" id="basic-addon1"></span>
+        <label class="form-control">N. Carollina</label>
+      </div>
+      <div class="input-group ng-scope" style="margin-left:30px;">
+        <div><a href="/selcategory">Charlotte</a></div>
+      </div>
+      <div class="input-group ng-scope">
+        <span class="input-group-addon input-group-addon-info addon-left" id="basic-addon1"></span>
+        <label class="form-control">New Jersey</label>
+      </div>
+      <div class="input-group ng-scope" style="margin-left:30px;">
+        <div><a href="/selcategory">Central Jersey</a></div>
+        <div><a href="/selcategory">Jersey Shore</a></div>
+        <div><a href="/selcategory">North Jersey</a></div>
+        <div><a href="/selcategory">South Jersey</a></div>
+      </div>
+      <div class="input-group ng-scope">
+        <span class="input-group-addon input-group-addon-info addon-left" id="basic-addon1"></span>
+        <label class="form-control">Nevada</label>
+      </div>
+      <div class="input-group ng-scope" style="margin-left:30px;">
+        <div><a href="/selcategory">Las Vegas</a></div>
+      </div>
+      <div class="input-group ng-scope">
+        <span class="input-group-addon input-group-addon-info addon-left" id="basic-addon1"></span>
+        <label class="form-control">New York</label>
+      </div>
+      <div class="input-group ng-scope" style="margin-left:30px;">
+        <div><a href="/selcategory">Brooklyn</a></div>
+        <div><a href="/selcategory">Long Island</a></div>
+        <div><a href="/selcategory">Manhattan</a></div>
+        <div><a href="/selcategory">Queens</a></div>
+        <div><a href="/selcategory">Westchester</a></div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="input-group ng-scope">
+        <span class="input-group-addon input-group-addon-info addon-left" id="basic-addon1"></span>
+        <label class="form-control">Pennsylvania</label>
+      </div>
+      <div class="input-group ng-scope" style="margin-left:30px;">
+        <div><a href="/selcategory">Allentown</a></div>
+        <div><a href="/selcategory">Philadelphia</a></div>
+        <div><a href="/selcategory">Pittsburgh</a></div>
+      </div>
+      <div class="input-group ng-scope">
+        <span class="input-group-addon input-group-addon-info addon-left" id="basic-addon1"></span>
+        <label class="form-control">Texas</label>
+      </div>
+      <div class="input-group ng-scope" style="margin-left:30px;">
+        <div><a href="/selcategory">Austin</a></div>
+        <div><a href="/selcategory">Dallas</a></div>
+        <div><a href="/selcategory">El Paso</a></div>
+        <div><a href="/selcategory">Fort Worth</a></div>
+        <div><a href="/selcategory">Houston</a></div>
+        <div><a href="/selcategory">Mid Cities</a></div>
+        <div><a href="/selcategory">San Antonio</a></div>
+      </div>
+      <div class="input-group ng-scope">
+        <span class="input-group-addon input-group-addon-info addon-left" id="basic-addon1"></span>
+        <label class="form-control">Washington</label>
+      </div>
+      <div class="input-group ng-scope" style="margin-left:30px;">
+        <div><a href="/selcategory">Everett</a></div>
+        <div><a href="/selcategory">Seattle</a></div>
+        <div><a href="/selcategory">Tacoma</a></div>
+      </div>
+    </div>-->
+  </div>
+</div>

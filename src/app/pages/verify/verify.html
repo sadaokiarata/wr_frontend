@@ -1,0 +1,24 @@
+<div class="auth-main">
+  <div class="auth-block">
+    <h1>Verify your email</h1>
+    <a class="auth-link">Check your email and input your verification code.</a>
+    <form class="form-horizontal animated fadeInUp" ng-controller="VerifyController">
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <input class="form-control" id="inputEmail3" placeholder="Verification code" ng-model="verifyCode">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <span style="color:red">{{result}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+          <button type="submit" class="btn btn-info btn-auth" ng-click="OnVerify()">Verify</button>
+        </div>
+      </div>
+      <a href class="forgot-pass" ng-click="OnResend()">Send verification code again</a>
+    </form>
+  </div>
+</div>

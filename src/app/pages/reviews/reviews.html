@@ -1,0 +1,38 @@
+<div class="auth-main" ng-controller="ReviewsController">
+  <div class="auth-full">
+    <div class="col-md-offset-3 col-md-6">
+      <div class="input-group ng-scope">
+        <input type="text" class="form-control with-danger-addon" placeholder="Search for..." ng-model="searchText">
+        <span class="input-group-btn">
+            <button class="btn btn-info" type="button" title="search" ng-click="OnPage(-1)"><i class="fa fa-search"/></button>
+        </span>
+      </div>
+      <div class="form-group">
+        <div paging page="currentPage+1" page-size="10" total="total" style="text-align:center"
+            show-prev-next="true" show-first-last="true" paging-action="OnPage(page-1)"></div>
+      </div>
+      <div class="form-group" style="text-align: center">Total: {{total}}</div>
+      <button class="btn btn-sm btn-info" style="margin-bottom:10px" ng-click="OpenWindow('app/pages/reviews/writedlg.html', 'md', -1)">Add my review</button>
+      <div class="form-group row" ng-repeat="review in reviews">
+        <div class="form-group" style="border:1px solid;padding:10px">
+          <strong>{{review.review_title}}</strong>
+          <i class="fa fa-thumbs{{review.you_like?'':'-o'}}-up" style="padding:5px;color:blue;cursor:pointer" ng-click="OnLike($index, true)" title="I Like">  {{review.like}}</i>
+          <i class="fa fa-thumbs{{review.you_dislike?'':'-o'}}-down" style="padding:5px;color:red;cursor:pointer" ng-click="OnLike($index, false)" title="I Dislike">  {{review.dislike}}</i>
+          <button class="btn btn-info" ng-click="OpenWindow('app/pages/reviews/writedlg.html', 'md', review.review_id)" title="Reply" style="float:right">+</button>
+          <button class="btn btn-danger" ng-click="" title="Remove" style="float:right">-</button>
+          <br>Posted by <strong>{{review.sender_name}}</strong>({{review.review_time}})
+          <div style="margin:10px;white-space:pre">{{review.review_content}}</div>
+          <div style="margin-left:20px;border-top:1px solid;padding:10px" ng-repeat="child in review.children">
+              <strong>{{child.review_title}}</strong>
+              <br>({{child.review_time}})
+            <div style="margin:10px;white-space:pre">{{child.review_content}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div paging page="currentPage+1" page-size="10" total="total" style="text-align:center"
+            show-prev-next="true" show-first-last="true" paging-action="OnPage(page-1)"></div>
+      </div>
+    </div>
+  </div>
+</div>
