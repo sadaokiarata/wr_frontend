@@ -18,7 +18,7 @@
   }
   function RegisterController($scope, $http, $location, $window, toastr) {
     console.log("register ");
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     if (user != null && user != undefined) {
       var token = user.token;
       console.log("postad token", token, user);

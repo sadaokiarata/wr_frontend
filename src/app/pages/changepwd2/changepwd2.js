@@ -17,7 +17,7 @@
       });
   }
   function ChangePwdController2($scope, $window, $location) {
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     if (user == null || user == undefined) {
       console.log("login needed1");
       //$location.path("/login");

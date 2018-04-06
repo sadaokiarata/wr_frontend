@@ -6,11 +6,11 @@
     <h4 class="modal-title" id="myModalLabel">Reviews</h4>
   </div>
   <div class="modal-body">
-    <input type="text" ng-model="review_title" placeholder="Input review title or customer's name" maxlength="255" style="width:100%;margin-bottom:5px">
+    <input type="text" ng-model="review_title" placeholder="Input review title or customer's name" maxlength="255" style="width:100%;margin-bottom:5px" ng-hide="selected!=-1">
     <textarea type="text" ng-model="review_content" placeholder="Input review content here" maxlength="1000" style="width:100%;min-height:200px"></textarea>
     <span style="line-height:30px;font-size:12px;">Remaining: {{1000 - review_content.length}}</span>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-info" ng-click="$dismiss();OnReview(review_title,review_content, re);" ng-disabled="review_title == undefined || review_title == '' || review_content == undefined || review_content == ''">Send</button>
+    <button type="button" class="btn btn-primary" ng-click="$dismiss();OnReview(review_title,review_content, re);" ng-disabled="(selected == -1 && (review_title == undefined || review_title == '')) || review_content == undefined || review_content == ''">Send</button>
   </div>
 </div>

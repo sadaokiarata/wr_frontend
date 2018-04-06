@@ -17,10 +17,10 @@
               </div>
             </div>
             <div class="col-lg-8" style="min-height:200px">
-              <div class="form-group" ng-if="ad.category_name!='Massage'"><strong>Ad Name: {{ad.post_name}}</strong></div>
-              <div class="form-group"><span>{{ad.post_title}}</span></div>
+              <div class="form-group" ng-if="ad.category_name!='Massage'"><strong><span ng-if="ad.category_name=='Jobs'">Business&nbsp;</span>Name: {{ad.post_name}}</strong></div>
+              <div class="form-group"><span><span ng-if="ad.category_name=='Jobs'">Job&nbsp;</span>Title: {{ad.post_title}}</span></div>
               <div class="form-group"><span>Address: {{ad.addr}}</span></div>
-              <div class="form-group"><span>Phone: {{ad.phone}}</span></div>
+              <div class="form-group"><span>Phone: {{ad.phone | phonefmt}}</span></div>
               <div class="form-group"><span>Website: <a href="{{ad.url}}">{{ad.url}}</a></span></div>
               <!--<div class="form-group"><span ng-if="ad.show_email==1">Email: {{ad.email}}</span></div>-->
               <div class="form-group"><span>Posted: {{ad.post_time}}</span></div>
@@ -37,7 +37,7 @@
         <hr/>
         <div class="form-group" style="word-break: break-word;overflow-wrap: break-word;word-wrap: break-word;">{{ad.post_desc}}</div>
         <hr/>
-        <div class="form-group">
+        <div class="form-group" ng-hide="ad.category_name=='Jobs'">
           <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:300px">
             <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -76,7 +76,7 @@
             </a>
           </div>
         </div>
-        <div class="form-group row animated zoomIn">
+        <div class="form-group row animated zoomIn" ng-hide="ad.category_name=='Jobs'">
           <div class="item col-md-3 active" style="height:100px">
             <img ng-src="{{'https://localhost:3009/advertisements/' + ad.post_id + '/image/1'}}" style="width:100%;height:100%;object-fit:contain"
               data-toggle="modal" ng-click="OpenImage('app/pages/view/viewimg.html', 1)">
@@ -104,7 +104,7 @@
           (<span am-time-ago="{{message.message_time}}"></span>)
           <div class="form-group" style="white-space:pre">{{message.message_content}}</div>
         </div> -->
-        <h4>Conversations</h4>
+        <h4 id="messagebox">Conversations</h4>
         <!-- <div ng-if="user_id==null">(You have to log in to use conversation.)</div> -->
         <div class="row" ng-if="user_id!=null">
           <div class="row">
@@ -128,7 +128,7 @@
                       <li class="left clearfix" ng-repeat="contact in contacts | filter: {user_name: search}" ng-click="GetConversation(contact.user_id)" ng-if="user_id==ad.user_id">
                         <span class="chat-img pull-left"><img src="assets/img/error.png" alt="User Avatar" class="img-circle"></span>
                         <div class="chat-body clearfix">
-                          <div class="header_sec" ng-style="contact_id==contact.user_id?{'font-style':'italic'}:{}">{{contact.user_name}}<!--<strong class="pull-right">09:45AM</strong>--></div>
+                          <div class="header_sec" ng-style="contact_id==contact.user_id?{'font-style':'italic'}:{}">{{contact.user_name | hiddenemail}}<!--<strong class="pull-right">09:45AM</strong>--></div>
                           <div class="contact_sec">
                             <strong class="primary-font"><!--(123) 123-456--></strong> <span class="badge pull-right" ng-if="contact.cnt>0">{{contact.cnt}}</span>
                           </div>

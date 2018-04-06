@@ -18,7 +18,8 @@
   }
   var dataStream;
   function ViewController($scope, $window, $rootScope, $location, $http, $timeout, $uibModal, $stateParams, $interval, $websocket, toastr) {
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
+    console.log("aaa", $stateParams);
     setInterval(function() {
       if ((dataStream == undefined || dataStream.readyState != 1) && user != undefined) {
         dataStream = undefined;
@@ -118,7 +119,7 @@
       method: "GET",
       url: 'https://localhost:3009/locations',
     }).then(function (response) {
-      //$window.sessionStorage.setItem("locations", JSON.stringify());
+      //$window.localStorage.setItem("locations", JSON.stringify());
       $scope.locations = response.data.locations;
     });
     if (user != undefined && user != null && $rootScope.selectedId != undefined) {

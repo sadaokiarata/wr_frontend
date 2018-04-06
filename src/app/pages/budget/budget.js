@@ -17,7 +17,7 @@
   }
 
   function BudgetController($scope, $rootScope, $http, $location, $window, toastr) {  
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     $scope.currentPage = 0;
     if (user == null || user == undefined) {
       console.log("login needed1");
@@ -37,7 +37,7 @@
         if (response.data.ret != -1) {
           $rootScope.budget = response.data.budget;
           user.budget = $rootScope.budget;
-          $window.sessionStorage.setItem("user", JSON.stringify(user));
+          $window.localStorage.setItem("user", JSON.stringify(user));
           $scope.amount = 0;
           $location.path("/budget");
         }

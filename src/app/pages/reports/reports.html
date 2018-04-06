@@ -1,42 +1,48 @@
 <div class="auth-main" ng-controller="ReportsController">
   <div class="auth-full">
-    <div class="form-group">
-      <div paging page="currentPage+1" page-size="10" total="total" style="text-align:center"
-          show-prev-next="true" show-first-last="true" paging-action="OnPage(page-1)"></div>
+    <div class="panel panel-primary">
+      <div class="panel-heading"><strong>Reports</strong></div>
+      <div class="panel-body">
+        <table class="table tableCu animated fadeIn">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Post Id</th>
+                <th>Post Name</th>
+                <th>Post writer</th>
+                <th>Reporter</th>
+                <th>Report Content</th>
+                <th>Report Time</th>
+                <th>Read Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="report in reports">
+                <td>{{10 * currentPage + $index + 1}}</td>
+                <td>{{report.post_id}}</td>
+                <td>{{report.post_name}}<span class="badge label-danger" ng-if="!report.read_already">New</span></td>
+                <td>{{report.poster_name}}</td>
+                <td>{{report.reporter_name}}</td>
+                <td>{{report.report_content}}</td>
+                <td><span am-time-ago="{{report.report_time}}"></span></td>
+                <td style="padding-top:10px"><ba-switcher switcher-style="info" switcher-value="report.read_already" ng-mousedown="OnOpen($index, !report.read_already)"></ba-switcher></td>
+                <td>
+                  <button class="btn btn-danger badge btn-sq" ng-click="GoDelete($index);">
+                    <i class="glyphicon glyphicon-trash"/>
+                  </button></td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col col-md-8">Page {{currentPage + 1}} of {{((total+9)/10) | floor}}</div>
+          <div class="col col-md-4">
+            <div paging page="currentPage+1" page-size="10" total="total" show-prev-next="true" show-first-last="true" paging-action="OnPage(page-1)"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-group" style="text-align: center">
-      Total: {{total}}
-    </div>
-    <table class="table table-striped tableCu animated fadeIn">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Post Id</th>
-          <th>Post Name</th>
-          <th>Post writer</th>
-          <th>Reporter</th>
-          <th>Report Content</th>
-          <th>Report Time</th>
-          <th>Read Status</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="report in reports">
-          <td>{{10 * currentPage + $index + 1}}</td>
-          <td>{{report.post_id}}</td>
-          <td>{{report.post_name}}<span class="badge label-danger" ng-if="!report.read_already">New</span></td>
-          <td>{{report.poster_name}}</td>
-          <td>{{report.reporter_name}}</td>
-          <td>{{report.report_content}}</td>
-          <td><span am-time-ago="{{report.report_time}}"></span></td>
-          <td style="padding-top:10px"><ba-switcher switcher-style="info" switcher-value="report.read_already" ng-mousedown="OnOpen($index, !report.read_already)"></ba-switcher></td>
-          <td>
-            <button class="btn btn-danger badge btn-sq" ng-click="GoDelete($index);">
-              <i class="glyphicon glyphicon-trash"/>
-            </button></td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>

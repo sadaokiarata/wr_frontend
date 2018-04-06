@@ -10,11 +10,13 @@
   <title>Whorub</title>
 
   <!--<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic' rel='stylesheet' type='text/css'> phoenix-->
-
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" type="text/css">
+  <!--<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96x96.png">
-
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96x96.png">-->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  
   <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
   <!-- bower:css -->
   <!-- run `gulp inject` to automatically populate bower styles dependencies -->
@@ -27,20 +29,20 @@
   <!-- endinject -->
   <!-- endbuild -->
 </head>
-<body style="background:white;font-size: 1.8em;line-height: 25px;">
+<body style="background:white;line-height: 25px;">
 <div class="body-bg"></div>
 <main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
-
   <ba-sidebar></ba-sidebar>
   <page-top></page-top>
-
+  
+  
+  
   <div class="al-main">
     <div class="al-content">
       <!-- <content-top></content-top> -->
       <div ui-view autoscroll="true" autoscroll-body-top></div>
     </div>
   </div>
-
   <footer class="al-footer clearfix" style="display:flex">
     <div class="al-footer-main clearfix">
       <div class="row" style="text-align:center;">
@@ -68,11 +70,7 @@
         </div>
         <div class="modal-body">
           <div class="mainBody" style="height:300px;overflow-y:scroll;">
-            <!-- <h2>Terms</h2> -->
             <div>
-              <!-- <p>
-                <font size="1">Updated Mar 20, 2017</font>
-              </p> -->
               <b></b>
               <p><b>Objectives/Content: </b></p>
               <p>whorub.com is a web site (the "Site") that hosts classified advertising and related content created and developed
@@ -91,7 +89,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-info" ng-click="$dismiss();" data-dismiss="modal">OK</button>
+          <button type="button" class="btn btn-primary" ng-click="$dismiss();" data-dismiss="modal">OK</button>
         </div>
       </div>
   </div>
@@ -247,23 +245,7 @@
                   property owner’s behalf.</p>
                 <p>Our copyright agent can be reached as follows:</p>
                 <p>Email: <a href="mailto:report@whorub.com">report@whorub.com</a> (Please put Copyright Infringement in the subject
-                  line)</p>
-        
-                or:
-                <p>Copyright Agent<br> PO Box 802426 <br> Dallas, TX USA 75380-2426</p>
-                <p>Fax: 214-757-8548</p>
-                <p>The Site may, under appropriate circumstances and at our own discretion, disable and/or terminate the accounts of
-                  users who may be repeat infringers.</p>
-        
-                <b></b>
-                <p><b>Contact Us: </b></p>
-                <p> Email: <a href="https://my.whorub.com/classifieds/Contact">Contact us</a>
-                  <br>Telephone: +44 1929290057<br>
-        
-                </p>
-                <p>Mailing Address:<br> Post Sol.<br> PO Box 802426 <br> Dallas, TX USA 75380-2426</p>
-        
-        
+                  line)</p>       
                 <b></b>
                 <p><b>Privacy Policy: </b></p>
                 <p>The Site has created a Privacy Policy setting forth how information collected about you is collected, used and stored.
@@ -366,12 +348,12 @@
                   regard to its choice of law provisions. Any action you or any third party may bring to enforce these Terms, or
                   in connection with any matters related to the Site, shall be brought only in either the state or Federal courts
                   located in Arizona, and you expressly consent to the jurisdiction of said courts. You also agree that regardless
-                  of any statute or law to the c
+                  of any statute or law
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-info" ng-click="$dismiss();" data-dismiss="modal">Agree</button>
+            <button type="button" class="btn btn-primary" ng-click="$dismiss();" data-dismiss="modal">Agree</button>
           </div>
         </div>
     </div>
@@ -396,5 +378,7 @@
 <!-- endbuild -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://checkout.stripe.com/checkout.js"></script>
+<script src="http://letteringjs.com/js/jquery.lettering-0.6.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/textillate/0.4.0/jquery.textillate.min.js"></script>
 </body>
 </html>

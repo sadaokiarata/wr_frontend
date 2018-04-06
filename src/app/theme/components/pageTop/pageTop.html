@@ -1,27 +1,32 @@
-<div class="page-top clearfix" scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}">
-  <!-- <a href="/dashboard" class="al-logo clearfix"><span>Who</span>rub</a> -->
-  <!--<a href class="collapse-menu-link ion-navicon" ba-sidebar-toggle-menu></a>
 
-  <div class="search">
-    <i class="ion-ios-search-strong" ng-click="startSearch()"></i>
-    <input id="searchInput" type="text" placeholder="Search for...">
-  </div>-->
-  <div class="animated flip">
-    <a href="/#/home//" class="al-logo clearfix"><img src="assets/img/logo.jpg"/><!--<span>Who</span>rub--></a>
+<div class="clearfix" scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}"><!--page-top -->
+  <div id="particles-js" class="page-top clearfix" style="background-color:#47a3da;height:100px"></div>
+  
+  <div class="page-top">
+    <a href="/#/home/1/1" class="al-logo">               
+      <!-- <img src="assets/img/logo.jpg"/> -->
+      <div class="tlt">
+        <ul class="texts">
+          <li data-in-effect="bounceIn" data-out-effect="fadeOut" data-in-shuffle="true" data-out-shuffle="true">Whorub</li>
+          <li data-in-effect="bounceIn" data-out-effect="fadeOut" data-in-shuffle="true" data-out-shuffle="true">Whorub</li>
+          <li data-in-effect="bounceIn" data-out-effect="fadeOut" data-in-shuffle="true" data-out-shuffle="true">Whorub</li>
+        </ul>
+      </div>
+    </a>
   </div>
-  <div class="user-profile clearfix">
+  <div class="page-top user-profile">
     <div class="al-user-profile" uib-dropdown ng-hide="!logined">
       <a uib-dropdown-toggle class="collapse-menu-link ion-navicon"></a>
       <ul class="top-dropdown-menu profile-dropdown" uib-dropdown-menu>
         <li><i class="dropdown-arr"></i></li>
-        <!-- <li><a href="/#/home//"><i class="fa fa-home"></i>Home</a></li> -->
+        <li><a href="/#/home//"><i class="fa fa-home"></i>Home</a></li>
         <li><a href=""><i class="fa fa-user"></i>{{username}}</a></li> <!--/profile-->
-        <li><a href><i class="fa fa-cog"></i>Credits: ${{budget / 100}}</a></li>
+        <li><a href><i class="fa fa-cog"></i>Credits: ${{(budget / 100).toLocaleString()}}</a></li>
         <li><a href="/#/myads"><i class="fa fa-folder-o"></i>My Ads</a></li>
         <!-- <li><a href="/messages"><i class="fa fa-envelope"></i>Messages</a></li> -->
         <li><a href="/#/conversations"><i class="fa fa-envelope"></i>Messages</a></li>
         <li><a href="/#/budget"><i class="fa fa-shopping-cart"></i>Buy Credit</a></li>
-        <li><a href="/#/postad"><i class="fa fa-bullhorn"></i>Post Ad</a></li>
+        <!--<li><a href="/#/postad"><i class="fa fa-bullhorn"></i>Post Ad</a></li>-->
         <li><a href="/#/changepwd"><i class="fa fa-shield"></i>Change Password</a></li>
         <!-- <li><a href="/reviews"><i class="fa fa-book"></i>Reviews</a></li> -->
         <li><a href="/#/users" ng-if="isAdmin"><i class="fa fa-users"></i>Users</a></li>
@@ -41,16 +46,36 @@
         <li><a href="/#/register"><i class="fa fa-lock"></i>Signup</a></li>
       </ul>
     </div>
-    <msg-center class="hidden-sm hidden-xs"></msg-center>
-    <a style="line-height:42px;margin-right:20px" href="/#/login" ng-hide="logined" class="hidden-xs">LOGIN</a>
-    <a style="line-height:42px;margin-right:20px" href="/#/register" ng-hide="logined" class="hidden-xs">SIGN UP</a>
+    <msg-center class="hidden-xs" ng-hide="!logined"></msg-center>
+    <a class="al-user-profile hidden-xs" style="margin-right:50px" href="/#/login" ng-hide="logined" class="hidden-xs">
+      <span id="#" class="bsn bsn-default">
+        <span class="mask"></span>
+        <span class="bsn-label">
+          <b><i class="fa fa-sign-in"/> LOG IN</b>
+        </span>
+      </span>
+    </a>
+    <a class="al-user-profile hidden-xs" style="margin-right:90px;" href="/#/register" ng-hide="logined" class="hidden-xs">
+      <span id="#" class="bsn bsn-default">
+        <span class="mask"></span>
+        <span class="bsn-label">
+          <b><i class="fa fa-user-plus"/> SIGN UP</b>
+        </span>
+      </span>
+    </a>
     <!--www.iconfinder.com/iconsets/flags_gosquared-->
     <!--<select class="" style="padding:5px;border-radius:10px">
       <option data-image="assets/img/ko.png" value="0" selected>English</option>
       <option value="1">Japanese</option>
       <option value="2">Korean</option>
     </select>-->
-    <a href="/#/postad"><button class="btn btn-info" style="margin-right:20px">Post AD</button></a>
-    
+    <a class="al-user-profile hidden-xs" href="/#/postad" style="margin-right:110px">
+      <span id="#" class="bsn bsn-default alternate-bg">
+        <span class="mask"></span>
+        <span class="bsn-label">
+          <b><i class="fa fa-pencil"/> POST AD</b>
+        </span>
+      </span>
+    </a>
   </div>
 </div>

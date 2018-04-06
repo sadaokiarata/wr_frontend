@@ -115,7 +115,7 @@ textarea.form-control {
       @include setSwitcherColor($danger);
     }
     &.info {
-      @include setSwitcherColor($info);
+      @include setSwitcherColor($primary);
     }
     position: relative;
     display: inline-block;

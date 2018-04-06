@@ -1,26 +1,38 @@
 <div class="auth-main" ng-controller="Step1Controller">
   <div class="auth-full">
-    <div class="row" style="margin-bottom:40px">
-      <div class="col-md-offset-1 col-md-3 label-info" style="text-align:center;margin-right:5px;padding:10px;color:white" ng-click="">Step 1: Ad Information</div>
-      <div class="col-md-3 label-default" style="text-align:center;margin-right:5px;padding:10px;color:lightgrey" ng-click="">Step 2: Preview Post</div>
-      <div class="col-md-3 label-default" style="text-align:center;margin-right:5px;padding:10px;color:lightgrey" ng-click="">Step 3: Payment</div>
+    <div class="stepwizard">
+      <div class="stepwizard-row">
+        <div class="stepwizard-step">
+          <button type="button" class="btn btn-primary btn-circle">1</button>
+          <p>Step 1: AD Information</p>
+        </div>
+        <div class="stepwizard-step">
+          <button type="button" class="btn btn-secondary btn-circle" disabled="disabled">2</button>
+          <p>Step 2: Preview</p>
+        </div>
+        <div class="stepwizard-step">
+          <button type="button" class="btn btn-secondary btn-circle" disabled="disabled">3</button>
+          <p>Step 3: Payment</p>
+        </div> 
+      </div>
     </div>
     <h1>{{ad.state_name}} > {{ad.city_name}} > {{ad.category_name}}</h1>
     <div class="col-md-offset-3 col-md-6 animated zoomIn" id="mainfield">
       <!--whole main start -->
       <h3 style="text-align:center;">AD Information</h3>
       <div class="form-group">
-        <label>Postings in this category are ${{ad.category_credit / 100}}</label><br>
-        <label>Postings in this city are ${{ad.city_credit / 100}}</label>
+        <!--<label>Postings in this category are ${{ad.category_credit / 100}}</label><br>
+        <label>Postings in this city are ${{ad.city_credit / 100}}</label>-->
+        <label>Price: ${{(ad.category_credit + ad.city_credit) / 100}}</label>
       </div>
       <div class="form-group" ng-if="ad.category_name!='Massage'">
-        <label for="input01">Name:<span style="color:#e85656">*</span></label>
+        <label for="input01"><span ng-if="ad.category_name=='Jobs'">Business&nbsp;</span>Name:<span style="color:#e85656">*</span></label>
         <input type="text" class="form-control" placeholder="Name" maxlength="30" minlength="3" ng-model="ad.post_name" value="Default Name"
           style="background:white" required>
         <span class="col-sm-offset-1" style="line-height:30px;font-size:12px;">Remaining: {{30 - ad.post_name.length}}</span>
       </div>
       <div class="form-group">
-        <label for="input01">Title:<span style="color:#e85656">*</span></label>
+        <label for="input01"><span ng-if="ad.category_name=='Jobs'">Job&nbsp;</span>Title:<span style="color:#e85656">*</span></label>
         <input type="text" class="form-control" placeholder="Title" maxlength="100" ng-model="ad.post_title" value="Default Title"
           style="background:white" required>
         <span class="col-sm-offset-1" style="line-height:30px;font-size:12px;">Remaining: {{100 - ad.post_title.length}}</span>
@@ -37,7 +49,7 @@
       </div>
       <div class="form-group">
         <label for="input01">Contact Phone:</label>
-        <input type="text" class="form-control" placeholder="Contact Phone" maxlength="20" ng-model="ad.phone"
+        <input type="text" class="form-control" placeholder="Contact Phone" maxlength="10" ng-model="ad.phone"
           style="background:white">
       </div>
       <div class="form-group">
@@ -89,7 +101,8 @@
         <input type="text" class="form-control" placeholder="Address" maxlength="50" ng-model="ad.addr" style="background:white">
       </div>
       <hr/>
-      <form name="uploadForm" id="uploadForm" action="https://localhost:3009/advertisements/33/upload" method="post" encType="multipart/form-data">
+      <form name="uploadForm" id="uploadForm" action="https://localhost:3009/advertisements/33/upload" method="post" encType="multipart/form-data"
+      ng-hide="ad.category_name=='Jobs'">
         <h3 style="text-align:center;">Post Profile Image</h3>
         <div class="form-group">
           <label for="input01">This image will show up as your profile image</label>
@@ -127,12 +140,11 @@
       <hr style="clear:both"/>
       <h3 style="text-align:center;">Move Ad to Top of List</h3>
       <div class="form-group">
-        <div class="row">
-          <label class="checkbox-inline custom-checkbox nowrap">
-            <input type="checkbox" id="inlineCheckbox01" ng-model="ad.movetotop">
-            <span>Move ad to top of list every hour for the next</span>
-          </label>
-        </div>
+        
+        <label class="checkbox-inline custom-checkbox nowrap">
+          <input type="checkbox" id="inlineCheckbox01" ng-model="ad.movetotop">
+          <span>Move ad to top of list every hour for the next</span>
+        </label>
         <div class="row">
           <div class="col-md-6">
             <select class="form-control" title="Choose" ng-model="ad.movetotop_times" ng-disabled="!ad.movetotop">
@@ -166,72 +178,70 @@
         </div>
       </div>
       <hr style="clear:both"/>
-      <h3 style="text-align:center;">Auto Repost Ad</h3>
+      <h3 style="text-align:center;">Auto Repost</h3>
       <div class="form-group">
-        <div class="row">
-          <label class="custom-checkbox">
-            <input type="checkbox" id="inlineCheckbox01" ng-model="ad.repost">
-            <span>Move your ad to top of listings every</span>
-          </label>
-          <select class="form-control" title="Choose" ng-model="ad.repost_interval" ng-disabled="!ad.repost" style="display:inline;width:80px;">
-            <option label="1 Day" value="1">1 Day</option>
-            <option label="2 Days" value="2">2 Days</option>
-            <option label="3 Days" value="3">3 Days</option>
-            <option label="4 Days" value="4">4 Days</option>
-            <option label="5 Days" value="5">5 Days</option>
-            <option label="6 Days" value="6">6 Days</option>
-            <option label="7 Days" value="7">7 Days</option>
-            <option label="8 Days" value="8">8 Days</option>
-            <option label="9 Days" value="9">9 Days</option>
-            <option label="10 Days" value="10">10 Days</option>
-            <option label="11 Days" value="11">11 Day</option>
-            <option label="12 Days" value="12">12 Days</option>
-            <option label="13 Days" value="13">13 Days</option>
-            <option label="14 Days" value="14">14 Days</option>
-            <option label="15 Days" value="15">15 Days</option>
-            <option label="16 Days" value="16">16 Days</option>
-            <option label="17 Days" value="17">17 Days</option>
-            <option label="18 Days" value="18">18 Days</option>
-            <option label="19 Days" value="19">19 Days</option>
-            <option label="20 Days" value="20">20 Days</option>
-            <option label="21 Days" value="21">21 Day</option>
-            <option label="22 Days" value="22">22 Days</option>
-            <option label="23 Days" value="23">23 Days</option>
-            <option label="24 Days" value="24">24 Days</option>
-            <option label="25 Days" value="25">25 Days</option>
-            <option label="26 Days" value="26">26 Days</option>
-            <option label="27 Days" value="27">27 Days</option>
-            <option label="28 Days" value="28">28 Days</option>
-            <option label="29 Days" value="29">29 Days</option>
-            <option label="30 Days" value="30">30 Days</option>
-          </select><label>&nbsp;after</label>
-          <select class="form-control" title="Opening hours" ng-model="ad.work_hour1" ng-disabled="!ad.repost" style="display:inline;width:100px;">
-            <option label="0:00 AM" value="0">0:00 AM</option>
-            <option label="1:00 AM" value="1">1:00 AM</option>
-            <option label="2:00 AM" value="2">2:00 AM</option>
-            <option label="3:00 AM" value="3">3:00 AM</option>
-            <option label="4:00 AM" value="4">4:00 AM</option>
-            <option label="5:00 AM" value="5">5:00 AM</option>
-            <option label="6:00 AM" value="6">6:00 AM</option>
-            <option label="7:00 AM" value="7">7:00 AM</option>
-            <option label="8:00 AM" value="8">8:00 AM</option>
-            <option label="9:00 AM" value="9">9:00 AM</option>
-            <option label="10:00 AM" value="10">10:00 AM</option>
-            <option label="11:00 AM" value="11">11:00 AM</option>
-            <option label="12:00 AM" value="12">12:00 NOON</option>
-            <option label="1:00 PM" value="13">1:00 PM</option>
-            <option label="2:00 PM" value="14">2:00 PM</option>
-            <option label="3:00 PM" value="15">3:00 PM</option>
-            <option label="4:00 PM" value="16">4:00 PM</option>
-            <option label="5:00 PM" value="17">5:00 PM</option>
-            <option label="6:00 PM" value="18">6:00 PM</option>
-            <option label="7:00 PM" value="19">7:00 PM</option>
-            <option label="8:00 PM" value="20">8:00 PM</option>
-            <option label="9:00 PM" value="21">9:00 PM</option>
-            <option label="10:00 PM" value="22">10:00 PM</option>
-            <option label="11:00 PM" value="23">11:00 PM</option>
-          </select>
-        </div>
+        <label class="custom-checkbox">
+          <input type="checkbox" id="inlineCheckbox01" ng-model="ad.repost">
+          <span>Move your ad to top of listings every</span>
+        </label>
+        <select class="form-control" title="Choose" ng-model="ad.repost_interval" ng-disabled="!ad.repost" style="display:inline;width:80px;">
+          <option label="1 Day" value="1">1 Day</option>
+          <option label="2 Days" value="2">2 Days</option>
+          <option label="3 Days" value="3">3 Days</option>
+          <option label="4 Days" value="4">4 Days</option>
+          <option label="5 Days" value="5">5 Days</option>
+          <option label="6 Days" value="6">6 Days</option>
+          <option label="7 Days" value="7">7 Days</option>
+          <option label="8 Days" value="8">8 Days</option>
+          <option label="9 Days" value="9">9 Days</option>
+          <option label="10 Days" value="10">10 Days</option>
+          <option label="11 Days" value="11">11 Day</option>
+          <option label="12 Days" value="12">12 Days</option>
+          <option label="13 Days" value="13">13 Days</option>
+          <option label="14 Days" value="14">14 Days</option>
+          <option label="15 Days" value="15">15 Days</option>
+          <option label="16 Days" value="16">16 Days</option>
+          <option label="17 Days" value="17">17 Days</option>
+          <option label="18 Days" value="18">18 Days</option>
+          <option label="19 Days" value="19">19 Days</option>
+          <option label="20 Days" value="20">20 Days</option>
+          <option label="21 Days" value="21">21 Day</option>
+          <option label="22 Days" value="22">22 Days</option>
+          <option label="23 Days" value="23">23 Days</option>
+          <option label="24 Days" value="24">24 Days</option>
+          <option label="25 Days" value="25">25 Days</option>
+          <option label="26 Days" value="26">26 Days</option>
+          <option label="27 Days" value="27">27 Days</option>
+          <option label="28 Days" value="28">28 Days</option>
+          <option label="29 Days" value="29">29 Days</option>
+          <option label="30 Days" value="30">30 Days</option>
+        </select><label>&nbsp;after</label>
+        <select class="form-control" title="Opening hours" ng-model="ad.work_hour1" ng-disabled="!ad.repost" style="display:inline;width:100px;">
+          <option label="0:00 AM" value="0">12:00 AM</option>
+          <option label="1:00 AM" value="1">1:00 AM</option>
+          <option label="2:00 AM" value="2">2:00 AM</option>
+          <option label="3:00 AM" value="3">3:00 AM</option>
+          <option label="4:00 AM" value="4">4:00 AM</option>
+          <option label="5:00 AM" value="5">5:00 AM</option>
+          <option label="6:00 AM" value="6">6:00 AM</option>
+          <option label="7:00 AM" value="7">7:00 AM</option>
+          <option label="8:00 AM" value="8">8:00 AM</option>
+          <option label="9:00 AM" value="9">9:00 AM</option>
+          <option label="10:00 AM" value="10">10:00 AM</option>
+          <option label="11:00 AM" value="11">11:00 AM</option>
+          <option label="12:00 PM" value="12">12:00 PM</option>
+          <option label="1:00 PM" value="13">1:00 PM</option>
+          <option label="2:00 PM" value="14">2:00 PM</option>
+          <option label="3:00 PM" value="15">3:00 PM</option>
+          <option label="4:00 PM" value="16">4:00 PM</option>
+          <option label="5:00 PM" value="17">5:00 PM</option>
+          <option label="6:00 PM" value="18">6:00 PM</option>
+          <option label="7:00 PM" value="19">7:00 PM</option>
+          <option label="8:00 PM" value="20">8:00 PM</option>
+          <option label="9:00 PM" value="21">9:00 PM</option>
+          <option label="10:00 PM" value="22">10:00 PM</option>
+          <option label="11:00 PM" value="23">11:00 PM</option>
+        </select>
         
         <label>Number of times</label>
         <select class="form-control" title="Choose" ng-model="ad.repost_count" ng-disabled="!ad.repost" style="display:inline;width:200px">
@@ -305,7 +315,7 @@
       </div>
       <div class="form-group">
         <div class="row" style="margin-top:50px">
-          <button class="btn btn-info btn-auth" ng-disabled="!bAgreement" ng-click="OnOK()">Continue</button>
+          <button class="btn btn-primary" ng-disabled="!bAgreement" ng-click="OnOK()">Continue</button>
         </div>
       </div>
     </div>

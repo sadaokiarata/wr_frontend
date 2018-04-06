@@ -51,7 +51,7 @@
         }
       });
     }
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     $scope.currentPage = 0;
     // console.log("dsfasdf", user);
     if (user == null || user == undefined) {

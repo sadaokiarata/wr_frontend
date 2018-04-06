@@ -1,58 +1,64 @@
 <div class="auth-main" ng-controller="UsersController">
   <div class="auth-full">
     <div class="input-group ng-scope" style="width:200px">
-      <input type="text" class="form-control with-danger-addon" placeholder="Search for..." ng-model="searchName">
+      <input type="text" class="form-control with-primary-addon" placeholder="Search for..." ng-model="searchName">
       <span class="input-group-btn">
-          <button class="btn btn-info" type="button" title="search" ng-click="OnPage(-1)"><i class="fa fa-search"/></button>
+          <button class="btn btn-primary" type="button" title="search" ng-click="OnPage(-1)"><i class="fa fa-search"/></button>
       </span>
     </div>
-    <div class="form-group">
-      <div paging page="currentPage+1" page-size="10" total="total" style="text-align:center"
-          show-prev-next="true" show-first-last="true" paging-action="OnPage(page-1)"></div>
+    <div class="panel panel-primary">
+      <div class="panel-heading"><strong>Users</strong></div>
+      <div class="panel-body">
+        <table class="table tableCu animated fadeIn">
+          <thead>
+            <tr>
+              <th>#</th>          
+              <th>Username</th>
+              <th>Type</th>
+              <th>Created</th>
+              <th>Budget</th>
+              <th></th>
+              <!--<th>Status</th>-->
+              <th>Suspend</th>
+              <th>Suspended till</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="user in users">
+              <td>{{10 * currentPage + $index + 1}}</td>
+              <td>{{user.user_name}}<strong></strong></td>
+              <td><span class="badge" ng-class="{'label-info': user.group_id==1}">{{user.group_id==1?"Admin":"User"}}</span></td>
+              <td>{{user.created_time.substr(0, 10)}}</td>
+              <td>${{user.budget / 100}}</td>
+              <td><button class="btn btn-primary" data-toggle="modal" ng-click="OpenWindow('app/pages/users/addcredit.html', 'sm', $index)">+</button></td>
+              <!--<td style="padding-top:5px">
+                <ba-switcher switcher-style="info" switcher-value="user.opened" ng-mousedown="OnOpen($index, !user.opened)"></ba-switcher>
+              </td>-->
+              <td><button class="btn btn-primary" ng-click="Suspend($index,1)">1d</button>
+                <button class="btn btn-primary" ng-click="Suspend($index,5)">5d</button>
+                <button class="btn btn-primary" ng-click="Suspend($index,15)">15d</button>
+                <button class="btn btn-primary" ng-click="Suspend($index,30)">30d</button>
+                <button class="btn btn-danger" ng-click="Suspend($index,10000)">permanently</button>
+                <button class="btn btn-warning" ng-click="Suspend($index,-1)">remove</button>
+              </td>
+              <td>{{user.suspended}}</td>
+              <td>
+                <button class="btn btn-danger badge btn-sq" ng-click="GoDelete($index);">
+                  <i class="glyphicon glyphicon-trash"/>
+                </button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col col-md-8">Page {{currentPage + 1}} of {{((total+9)/10) | floor}}</div>
+          <div class="col col-md-4">
+            <div paging page="currentPage+1" page-size="10" total="total" show-prev-next="true" show-first-last="true" paging-action="OnPage(page-1)"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-group" style="text-align: center">
-      Total: {{total}}
-    </div>
-    <table class="table table-striped tableCu animated fadeIn">
-      <thead>
-        <tr>
-          <th>#</th>          
-          <th>Username</th>
-          <th>Type</th>
-          <th>Created</th>
-          <th>Budget</th>
-          <th></th>
-          <!--<th>Status</th>-->
-          <th>Suspend</th>
-          <th>Suspended till</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="user in users">
-          <td>{{10 * currentPage + $index + 1}}</td>
-          <td>{{user.user_name}}<strong></strong></td>
-          <td><span class="badge" ng-class="{'label-info': user.group_id==1}">{{user.group_id==1?"Admin":"User"}}</span></td>
-          <td>{{user.created_time.substr(0, 10)}}</td>
-          <td>${{user.budget / 100}}</td>
-          <td><button class="btn btn-primary" data-toggle="modal" ng-click="OpenWindow('app/pages/users/addcredit.html', 'sm', $index)">+</button></td>
-          <!--<td style="padding-top:5px">
-            <ba-switcher switcher-style="info" switcher-value="user.opened" ng-mousedown="OnOpen($index, !user.opened)"></ba-switcher>
-          </td>-->
-          <td><button class="btn btn-primary" ng-click="Suspend($index,1)">1d</button>
-            <button class="btn btn-primary" ng-click="Suspend($index,5)">5d</button>
-            <button class="btn btn-primary" ng-click="Suspend($index,15)">15d</button>
-            <button class="btn btn-primary" ng-click="Suspend($index,30)">30d</button>
-            <button class="btn btn-danger" ng-click="Suspend($index,10000)">permantly</button>
-            <button class="btn btn-warning" ng-click="Suspend($index,-1)">remove</button>
-          </td>
-          <td>{{user.suspended}}</td>
-          <td>
-            <button class="btn btn-danger badge btn-sq" ng-click="GoDelete($index);">
-              <i class="glyphicon glyphicon-trash"/>
-            </button></td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>

@@ -19,9 +19,15 @@
   function HomeController($scope, $window, $rootScope, $location, $http, $timeout, $stateParams, $uibModal, toastr) { //
     $scope.pageSize = 30;
     $scope.viewMode = 0;
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     if (user != undefined && user != null) {
       $scope.logined = true;
+    }
+    if ($stateParams.state_cityName == "1") {
+      $rootScope.prev = 10;
+      $location.path('/sellocation');
+      console.log("ddddddddd");
+      return;
     }
     $scope.GotoCorrect = function() {
       var mine = $scope.mine;
@@ -78,6 +84,8 @@
           }
         });
       } else {
+        if ($scope.searchText == undefined || $scope.searchText == '')
+          return;
         $http({
           method: "GET",
           url: 'https://localhost:3009/reviews?token=' + user.token + "&offset=" + 10 * $scope.currentPage + '&city=' + $scope.city.city_id + ($scope.searchText!=undefined?("&search=" + $scope.searchText):''),
@@ -87,7 +95,9 @@
             $scope.total = response.data.total;
             for (var i = 0; i < $scope.reviews.length; i++) {
               $scope.reviews[i].review_time = new Date($scope.reviews[i].review_time).toLocaleString();
-              $scope.reviews[i].sender_name = $scope.reviews[i].sender_name.substr(0, 5) + "...";
+              $scope.reviews[i].review_title = $scope.reviews[i].review_title.replace(/([0-9]{5,5})[0-9]+/g, "$1**");
+              $scope.reviews[i].review_content = $scope.reviews[i].review_content.replace(/([0-9]{5,5})[0-9]+/g, "$1**");
+              //$scope.reviews[i].sender_name = $scope.reviews[i].sender_name.substr(0, 5) + "...";
               if ($scope.reviews[i].children == undefined)
                 continue;
               for (var j = 0; j < $scope.reviews[i].children.length; j++) {

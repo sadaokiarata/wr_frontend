@@ -4,13 +4,13 @@
         <!--whole main start -->
         <h3 style="text-align:center;">AD Information</h3>
         <div class="form-group" ng-if="ad.category_name!='Massage'">
-          <label for="input01">Name:<span style="color:#e85656">*</span></label>
+          <label for="input01"><span ng-if="ad.category_name=='Jobs'">Business&nbsp;</span>Name:<span style="color:#e85656">*</span></label>
           <input type="text" class="form-control" placeholder="Name" maxlength="30" minlength="3" ng-model="ad.post_name" value="Default Name"
             style="background:white" required>
           <span class="col-sm-offset-1" style="line-height:30px;font-size:12px;">Remaining: {{30 - ad.post_name.length}}</span>
         </div>
         <div class="form-group">
-          <label for="input01">Title:<span style="color:#e85656">*</span></label>
+          <label for="input01"><span ng-if="ad.category_name=='Jobs'">Job&nbsp;</span>Title:<span style="color:#e85656">*</span></label>
           <input type="text" class="form-control" placeholder="Title" maxlength="100" ng-model="ad.post_title" value="Default Title"
             style="background:white" required>
           <span class="col-sm-offset-1" style="line-height:30px;font-size:12px;">Remaining: {{100 - ad.post_title.length}}</span>
@@ -79,7 +79,8 @@
           <input type="text" class="form-control" placeholder="Address" maxlength="50" ng-model="ad.addr" style="background:white">
         </div>
         <hr/>
-        <form name="uploadForm" id="uploadForm" action="https://localhost:3009/advertisements/33/upload" method="post" encType="multipart/form-data">
+        <form name="uploadForm" id="uploadForm" action="https://localhost:3009/advertisements/33/upload" method="post" encType="multipart/form-data"
+            ng-hide="ad.category_name=='Jobs'">
           <h3 style="text-align:center;">Post Profile Image</h3>
           <div class="form-group">
             <label for="input01">This image will show up as your profile image</label>
@@ -271,7 +272,7 @@
         </div> ng-disabled="!bAgreement"-->
         <div class="form-group">
           <div class="row" style="margin-top:50px">
-            <button class="btn btn-info btn-auth"  ng-click="OnOK()">Update</button>
+            <button class="btn btn-primary btn-auth"  ng-click="OnOK()">Update</button>
           </div>
         </div>
       </div>

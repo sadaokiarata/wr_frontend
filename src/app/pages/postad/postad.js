@@ -16,8 +16,8 @@
         },
       });
   }
-  function PostAdController($scope, $rootScope, $window, $location) {
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+  function PostAdController($scope, $rootScope, $window, $location, toastr) {
+    var user = JSON.parse($window.localStorage.getItem("user"));
     if (user == null || user == undefined) {
       $location.path("/login");
       return;
@@ -30,6 +30,9 @@
     $scope.post =function() {
       $rootScope.prev = 1;
       $location.path("/sellocation");
+    }
+    $scope.multipost =function() {
+      toastr.success("Coming soon");
     }
   }
 })();

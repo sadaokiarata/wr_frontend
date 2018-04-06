@@ -1,5 +1,4 @@
 .page-top {
-  background-color: $sidebar;
   position: fixed;
   z-index: 904;
   // box-shadow: 2px 0px 3px rgba(0, 0, 0, 0.5);
@@ -7,8 +6,7 @@
   width: 100%;
   min-width: $resMin;
   padding: 0 32px 0 40px;
-  border-bottom: 2px solid #2dacd1;
-  &.scrolled {
+   &.scrolled {
     //background-color: rgba(black, 0.85)
   }
 }
@@ -24,7 +22,8 @@ a.al-logo {
   line-height: 60px;
 
   span {
-    color: $primary;
+    color: white;
+    font-size: 40px;
   }
 }
 

@@ -1,19 +1,10 @@
 <div class="auth-main" ng-controller="SelCategoryController">
   <div class="auth-full">
-    <h1>{{ad.state_name}} > {{ad.city_name}} > {{categories[ad.category].category_name}}</h1>
+    <h1>{{ad.state_name}} > {{ad.city_name}} </h1><!-- {{categories[ad.category].category_name}}-->
     <h3>Select a Category</h3>
-    <div class="col-md-offset-3 col-md-6">
-      <div class="row animated fadeIn" style="margin-bottom:20px;padding:0px">
-        <div class="col-md-6 col-lg-3" ng-repeat="category in categories" style="height:80px;padding:0px;border:1px solid white">
-          <div class="col-sm-12 label" style="text-align:center;font-size:18px;cursor:pointer;color:#2dacd1;height:100%;vertical-align:middle;align-items:center;justify-content:center;display:flex;white-space:pre-wrap"
-              ng-style="$index==categoryId? {'background':'darkgrey'}:{'background':'lightgrey'}" title="{{category.category_name}}" ng-click="SelCategory($index)">{{category.category_name}}</div>
-        </div>
-      </div>
+<!--ng-class="{'btn-4': $index % 2==0}"-->
+    <div class="row animated fadeIn" style="margin-bottom:20px;padding:0px">
+      <div class="col-md-6 col-lg-3" ng-repeat="category in categories"><button class="btn category-btn"  ng-click="SelCategory($index)">{{category.category_name}}</button></div>
     </div>
-    <!--<div class="form-group" style="margin-top:100px">
-      <div class="col-sm-offset-3 col-sm-6">
-        <a href="/step1"><button type="submit" class="btn btn-info btn-auth" ng-disabled="ad.category < 0">O K</button></a>
-      </div>
-    </div>-->
   </div>
 </div>

@@ -17,7 +17,7 @@
       });
   }
   function EditController($scope, $window, $rootScope, $location, $http, toastr) {
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     if (user == null || user == undefined) {
       console.log("login needed1");
       //$location.path("/login");
@@ -64,7 +64,7 @@
             $location.path("/step2");
           },
           error: function () {
-            toastr.error("uploading failed", "Error");
+            //toastr.error("uploading failed", "Error");
             $location.path("/step2");
           }
        });

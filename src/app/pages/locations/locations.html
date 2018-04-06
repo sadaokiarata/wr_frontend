@@ -1,66 +1,79 @@
 <div class="auth-main" ng-controller="LocationsController">
   <div class="auth-full">
     <div class="form-group" style="text-align: center">
-      <button type="button" class="btn btn-info" data-toggle="modal" ng-click="OpenWindow('app/pages/locations/createstatedlg.html', 'sm', 0)">Create State</button> 
+      <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="OpenWindow('app/pages/locations/createstatedlg.html', 'sm', 0)">Create State</button> 
     </div>
-    <table class="table tableCu">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>State Name</th>
-          <th>City Name</th>
-          <th>Slug Name</th>
-          <th>Latitude</th>
-          <th>Longitude</th>
-          <th>Population</th>
-          <th>Credits</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat-start="state in locations" style="background-color:rgba(0, 0, 0, 0.2)">
-          <td>{{$index + 1}}</td>
-          <td>{{state.state_name}}</td>
-          <td></td>
-          <td>{{state.state_slug}}</td>
-          <td></td>
-          <td></td>
-          <td>{{state.state_popul}}</td>
-          <td></td>
-          <td>
-            <!--<button class="btn btn-warning badge btn-sq" ng-click="GoView($index);">
-              <i class="glyphicon glyphicon-pencil"/>
-            </button>-->
-            <button class="btn btn-primary badge btn-sq" data-toggle="modal" ng-click="OpenWindow('app/pages/locations/createcitydlg.html', 'sm', $index)" title="Add city under that state">
-              <i class="glyphicon glyphicon-plus"/>
-            </button>
-            <button class="btn btn-danger badge btn-sq" ng-click="DeleteState(state.state_id);" title="Delete state">
-              <i class="glyphicon glyphicon-trash"/>
-            </button>
-            <button class="btn btn-secondary badge btn-sq" ng-click="state.expanded=!state.expanded" title="Expand">
-              <i class="glyphicon glyphicon-menu-down" ng-if="!state.expanded"/>
-              <i class="glyphicon glyphicon-menu-up" ng-if="state.expanded"/>
-            </button>
-          </td>
-        </tr>
-        <tr ng-repeat-end ng-repeat="city in state.cities" ng-show="state.expanded" style="background-color:rgba(0, 0, 0, 0.1)">
-          <td></td>
-          <td></td>
-          <td>{{city.city_name}}</td>
-          <td>{{city.city_slug}}</td>
-          <td style="width:200px"><a href="#" name="editable" editable-text="city.latitude" e-style="width:100px" onbeforesave="ChangePos(0, city.city_id, $data)">{{city.latitude}}</a></td>
-          <td style="width:200px"><a href="#" name="editable" editable-text="city.longitude" e-style="width:100px" onbeforesave="ChangePos(1, city.city_id, $data)">{{city.longitude}}</a></td>
-          <td></td>
-          <td><a href="#" name="editable" editable-text="city.credit" e-style="width:100px" onbeforesave="ChangeCredit(city.city_id, $data)">${{city.credit / 100}}</a></td>
-          <td>
-            <!--<button class="btn btn-primary badge btn-sq" ng-click="GoView($index);">
-              <i class="glyphicon glyphicon-pencil"/>
-            </button>-->
-            <button class="btn btn-danger badge btn-sq" ng-click="DeleteCity(city.city_id);" title="Delete city">
-              <i class="glyphicon glyphicon-trash"/>
-            </button></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="panel panel-primary">
+      <div class="panel-heading"><strong>Categories</strong></div>
+      <div class="panel-body">
+        <table class="table tableCu">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>State Name</th>
+              <th>City Name</th>
+              <th>Slug Name</th>
+              <th>Latitude</th>
+              <th>Longitude</th>
+              <th>Population</th>
+              <th>Credits</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat-start="state in locations" style="background-color:rgba(0, 0, 0, 0.2)">
+              <td>{{$index + 1}}</td>
+              <td>{{state.state_name}}</td>
+              <td></td>
+              <td>{{state.state_slug}}</td>
+              <td></td>
+              <td></td>
+              <td>{{state.state_popul}}</td>
+              <td></td>
+              <td>
+                <!--<button class="btn btn-warning badge btn-sq" ng-click="GoView($index);">
+                  <i class="glyphicon glyphicon-pencil"/>
+                </button>-->
+                <button class="btn btn-primary badge btn-sq" data-toggle="modal" ng-click="OpenWindow('app/pages/locations/createcitydlg.html', 'sm', $index)" title="Add city under that state">
+                  <i class="glyphicon glyphicon-plus"/>
+                </button>
+                <button class="btn btn-danger badge btn-sq" ng-click="DeleteState(state.state_id);" title="Delete state">
+                  <i class="glyphicon glyphicon-trash"/>
+                </button>
+                <button class="btn btn-secondary badge btn-sq" ng-click="state.expanded=!state.expanded" title="Expand">
+                  <i class="glyphicon glyphicon-menu-down" ng-if="!state.expanded"/>
+                  <i class="glyphicon glyphicon-menu-up" ng-if="state.expanded"/>
+                </button>
+              </td>
+            </tr>
+            <tr ng-repeat-end ng-repeat="city in state.cities" ng-show="state.expanded" style="background-color:rgba(0, 0, 0, 0.1)">
+              <td></td>
+              <td></td>
+              <td>{{city.city_name}}</td>
+              <td>{{city.city_slug}}</td>
+              <td style="width:200px"><a href="#" name="editable" editable-text="city.latitude" e-style="width:100px" onbeforesave="ChangePos(0, city.city_id, $data)">{{city.latitude}}</a></td>
+              <td style="width:200px"><a href="#" name="editable" editable-text="city.longitude" e-style="width:100px" onbeforesave="ChangePos(1, city.city_id, $data)">{{city.longitude}}</a></td>
+              <td></td>
+              <td><a href="#" name="editable" editable-text="city.credit" e-style="width:100px" onbeforesave="ChangeCredit(city.city_id, $data)">${{city.credit / 100}}</a></td>
+              <td>
+                <!--<button class="btn btn-primary badge btn-sq" ng-click="GoView($index);">
+                  <i class="glyphicon glyphicon-pencil"/>
+                </button>-->
+                <button class="btn btn-danger badge btn-sq" ng-click="DeleteCity(city.city_id);" title="Delete city">
+                  <i class="glyphicon glyphicon-trash"/>
+                </button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col col-md-8">Page {{currentPage + 1}} of {{(total+9)/10 | floor}}</div>
+          <div class="col col-md-4">
+            <div paging page="currentPage+1" page-size="10" total="total" show-prev-next="true" show-first-last="true" paging-action="OnPage(page-1)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

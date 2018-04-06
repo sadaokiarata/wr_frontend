@@ -55,7 +55,7 @@
         }
       });
     }
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     $scope.currentPage = 0;
     // console.log("dsfasdf", user);
     if (user == null || user == undefined) {
@@ -139,7 +139,7 @@
           if ($scope.users[$scope.selectedId].user_id == user.user_id) {
             user.budget += amount;
             $rootScope.budget = user.budget;
-            $window.sessionStorage.setItem("user", JSON.stringify(user));
+            $window.localStorage.setItem("user", JSON.stringify(user));
           }
         } else
           toastr.error(response.data.err, "Delete");

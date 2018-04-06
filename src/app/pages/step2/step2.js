@@ -17,7 +17,7 @@
   }
   
   function Step2Controller($scope, $window, $rootScope, $location, $http, $timeout, toastr) {
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     if (user == null || user == undefined) {
       //$location.path("/login");
       return;

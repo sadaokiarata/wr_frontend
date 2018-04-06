@@ -16,7 +16,7 @@
     });
   }
   function Step3Controller($scope, $window, $rootScope, $location, $http, toastr) {
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     $rootScope.budget = user.budget;
     $http({
       method: "GET",
@@ -55,10 +55,13 @@
         allowRememberMe: false,
         token: $scope.OnReceiveToken,
       });
-      handler.open();
+      handler.open({closed: function() {
+        console.log("Closed");
+      }});
     }
     $scope.OnReceiveToken = function(token, args) {
       var amount = -$scope.balance;
+      $("#btnComplete").prop("disabled", true);
       $http({
         method: "POST",
         url: 'https://localhost:3009/advertisements/pay',
@@ -80,17 +83,19 @@
             if (response.data.ret != -1) {
               user.budget = 0;
               $rootScope.budget = 0;
-              $window.sessionStorage.setItem("user", JSON.stringify(user));
+              $window.localStorage.setItem("user", JSON.stringify(user));
               $location.path("/step4");
             }
           });
+        } else {
+          $("#btnComplete").prop("disabled", false);
         }
       });
     }
     $scope.OnOK = function() {
       if ($scope.balance >= 0) {
         user.budget = $scope.balance;
-        $window.sessionStorage.setItem("user", JSON.stringify(user));
+        $window.localStorage.setItem("user", JSON.stringify(user));
         $rootScope.budget = $scope.balance;
         $http({
           method: "POST",

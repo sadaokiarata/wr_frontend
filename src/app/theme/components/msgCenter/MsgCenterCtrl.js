@@ -10,7 +10,7 @@
 
   /** @ngInject */
   function MsgCenterCtrl($scope, $rootScope, $http, $location, $window, $sce) {
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     $scope.currentPage = 0;
     // console.log("dsfasdf", user);
     if (user == null || user == undefined) {
@@ -35,8 +35,10 @@
       }).then(function (response) {
         $scope.total = response.data.total;
         $scope.reports = response.data.reports;
-        for (var i = 0; i < $scope.reports.length; i++)
-          $scope.reports[i].report_time = new Date($scope.reports[i].report_time);
+        if ($scope.reports != undefined) {
+          for (var i = 0; i < $scope.reports.length; i++)
+            $scope.reports[i].report_time = new Date($scope.reports[i].report_time);
+        }
       });
       $http({
         method: "GET",

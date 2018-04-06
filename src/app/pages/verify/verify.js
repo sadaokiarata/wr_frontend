@@ -18,7 +18,7 @@
   }
 
   function VerifyController($scope, $rootScope, $http, $location, $window, toastr) {
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     var token = user.token;
     if (token == undefined || token == null || token == "null") {
       console.log("user login needed1");
@@ -56,7 +56,7 @@
           $rootScope.username = response.data.username;
           $rootScope.isAdmin = (response.data.type == 1);
           $rootScope.budget = response.data.budget;
-          $window.sessionStorage.setItem("user", JSON.stringify(response.data));
+          $window.localStorage.setItem("user", JSON.stringify(response.data));
           if (response.data.type == 0) {
             $location.path("/myads");
           } else if (response.data.type > 0) {

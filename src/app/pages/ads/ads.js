@@ -43,7 +43,7 @@
         }
       });
     }
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     $scope.currentPage = 0;
     if (user == null || user == undefined) {
       console.log("login needed1");

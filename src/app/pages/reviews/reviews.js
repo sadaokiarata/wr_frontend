@@ -17,7 +17,7 @@
   }
   
   function ReviewsController($scope, $window, $rootScope, $location, $http, $timeout, $uibModal, $stateParams, toastr) {
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     $scope.currentPage = 0;
     if (user != undefined && user != null)
       $scope.user_id = user.user_id;

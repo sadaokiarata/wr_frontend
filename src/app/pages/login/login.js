@@ -40,7 +40,7 @@
       }).then(function (response) {
         if (response.data.ret == 0) {
           // toastr.info("Logined successfully", "Login")
-          $window.sessionStorage.setItem("user", JSON.stringify(response.data));
+          $window.localStorage.setItem("user", JSON.stringify(response.data));
           if (response.data.type == 0) {
             $location.path("/myads");
           } else if (response.data.type > 0) {
@@ -65,7 +65,7 @@
             }
           });
         } else if (response.data.ret == -2) {
-          $window.sessionStorage.setItem("user", JSON.stringify(response.data));
+          $window.localStorage.setItem("user", JSON.stringify(response.data));
           $location.path("/verify");
         } else {
           $scope.result = response.data.err;

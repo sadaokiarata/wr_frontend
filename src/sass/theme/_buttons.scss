@@ -7,10 +7,12 @@ $hover: 24;
 .btn {
   border-radius: 5px;
   transition: all 0.1s ease;
+  font-size:15px;
+  text-transform:uppercase;
 }
 
 .btn:hover {
-  transform: scale(1.2);
+  transform: scale(1.05);
 }
 
 @mixin styleButton($color, $borderColor) {

@@ -19,7 +19,7 @@
 
   function LogoutController($scope, $rootScope, $location, $window) {
     console.log("logout");
-    $window.sessionStorage.setItem("user", null);
+    $window.localStorage.setItem("user", null);
     $rootScope.logined = false;
     $location.path("/home//");
   }

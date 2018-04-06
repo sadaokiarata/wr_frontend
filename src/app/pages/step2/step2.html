@@ -1,9 +1,20 @@
 <div class="auth-main" ng-controller="Step2Controller">
   <div class="auth-full">
-    <div class="row" style="margin-bottom:40px">
-      <div class="col-md-offset-1 col-md-3 label-default" style="text-align:center;margin-right:5px;padding:10px;color:lightgrey" ng-click="">Step 1: Ad Information</div>
-      <div class="col-md-3 label-info" style="text-align:center;margin-right:5px;padding:10px;color:white" ng-click="">Step 2: Preview Post</div>
-      <div class="col-md-3 label-default" style="text-align:center;margin-right:5px;padding:10px;color:lightgrey" ng-click="">Step 3: Payment</div>
+    <div class="stepwizard">
+      <div class="stepwizard-row">
+        <div class="stepwizard-step">
+          <button type="button" class="btn btn-secondary btn-circle" disabled="disabled">1</button>
+          <p>Step 1: AD Information</p>
+        </div>
+        <div class="stepwizard-step">
+          <button type="button" class="btn btn-primary btn-circle">2</button>
+          <p>Step 2: Preview</p>
+        </div>
+        <div class="stepwizard-step">
+          <button type="button" class="btn btn-secondary btn-circle" disabled="disabled">3</button>
+          <p>Step 3: Payment</p>
+        </div>
+      </div>
     </div>
     <h1>{{ad.state_name}} > {{ad.city_name}} > {{ad.category_name}}</h1>
     <div class="col-md-offset-3 col-md-6">
@@ -21,19 +32,19 @@
               </div>
             </div>
             <div class="col-lg-8" style="min-height: 200px">
-              <div class="form-group" ng-if="ad.category_name!='Massage'"><strong>Ad Name: {{ad.post_name}}</strong></div>
-              <div class="form-group"><span>{{ad.post_title}}</span></div>
-              <br/><br/>
+              <div class="form-group" ng-if="ad.category_name!='Massage'"><strong><span ng-if="ad.category_name=='Jobs'">Business&nbsp;</span>Name: {{ad.post_name}}</strong></div>
+              <div class="form-group"><span><span ng-if="ad.category_name=='Jobs'">Job&nbsp;</span>Title: {{ad.post_title}}</span></div>
               <div class="form-group"><span>Address: {{ad.addr}}</span></div>
+              <div class="form-group"><span>Phone: {{ad.phone | phonefmt}}</span></div>
               <div class="form-group"><span>Website: <a href="{{ad.url}}">{{ad.url}}</a></span></div>
               <!--<div class="form-group"><span ng-if="ad.show_email==1">Email: {{ad.email}}</span></div>-->
               <div class="form-group"><span>Posted: {{ad.post_time}}</span></div>
               <div class="form-group"><span>Last Posted: {{ad.repost_time}}</span></div>
               <div class="form-group"><span>Repost count: {{ad.repost_count}}</span></div>
               <div class="form-group"><span>Repost interval: {{ad.repost_interval}} Hours</span></div>
-              <div class="form-group"><button class="btn btn-sm btn-warning" ng-click="ManualRepost()" ng-disabled="ad.repost_count <= 0">Move ad to top</button>
+              <div class="form-group"><button class="btn btn-sm btn-warning" ng-disabled="ad.repost_count <= 0">Move ad to top</button>
               <ba-switcher switcher-style="info" switcher-value="ad.opened"
-                  ng-mousedown="OnOpen(!ad.opened)" style="position:absolute;right:0px;bottom:0px"></ba-switcher>
+                  style="position:absolute;right:0px;bottom:0px"></ba-switcher>
             </div>
           </div>
         </div>
@@ -97,7 +108,7 @@
       </div>
       <div class="form-group">
         <div class="row" style="margin-top:50px">
-          <a href="/#/step3"><button type="submit" class="btn btn-info btn-auth">Next</button></a>
+          <a href="/#/step3"><button type="submit" class="btn btn-primary">Next</button></a>
         </div>
       </div>
     </div>

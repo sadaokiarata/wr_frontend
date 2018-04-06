@@ -17,7 +17,7 @@
       });
   }
   function SelLocationController($scope, $window, $rootScope, $location, $http) {
-    /*var user = JSON.parse($window.sessionStorage.getItem("user"));
+    /*var user = JSON.parse($window.localStorage.getItem("user"));
     if (user == null || user == undefined) {
       console.log("dfdfdf");
       //$location.path("/login");
@@ -34,13 +34,14 @@
       method: "GET",
       url: 'https://localhost:3009/locations',
     }).then(function (response) {
-      //$window.sessionStorage.setItem("locations", JSON.stringify());
+      //$window.localStorage.setItem("locations", JSON.stringify());
       $scope.locations = response.data.locations;
       //console.log(parseInt($scope.locations.length / 3));
       $scope.splits = new Array(3);
       $scope.splits[0] = new Array();
       $scope.splits[1] = new Array();
       $scope.splits[2] = new Array();
+      $scope.splits[3] = new Array();
       var total_cities = 0;
       for (var i = 0; i < $scope.locations.length; i++) {
         total_cities += $scope.locations[i].cities.length + 3;
@@ -50,12 +51,14 @@
         $scope.locations[i].expanded = true;
         cities_count += $scope.locations[i].cities.length + 3;
         $scope.splits[curr].push(i);
-        if (cities_count < total_cities / 3)
+        if (cities_count < total_cities / 4)
           curr = 0;
-        else if (cities_count < total_cities * 2 / 3)
+        else if (cities_count < total_cities * 2 / 4)
           curr = 1;
-        else
+        else if (cities_count < total_cities * 3 / 4)
           curr = 2;
+        else
+          curr = 3;
       }
     });
     

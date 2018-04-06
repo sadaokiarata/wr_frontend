@@ -38,7 +38,7 @@
         }
       });
     }
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     
     $scope.currentPage = 0;
     if (user == null || user == undefined) {
@@ -155,7 +155,7 @@
         if (response.data.ret == 0) {
           $scope.premium_price = new_data;
           user.premium_price = new_data;
-          $window.sessionStorage.setItem("user", JSON.stringify(user));
+          $window.localStorage.setItem("user", JSON.stringify(user));
           return val;
         } else {
           console.log("Error");

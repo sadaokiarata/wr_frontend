@@ -1,42 +1,51 @@
 <div class="auth-main" ng-controller="CategoriesController">
   <div class="auth-full">
-    <div class="form-group">
-      <div paging page="currentPage+1" page-size="10" total="total" style="text-align:center"
-          show-prev-next="true" show-first-last="true" paging-action="OnPage(page-1)"></div>
-    </div>
     <div class="form-group" style="text-align: center">
-      Total: {{total}}    <button type="button" class="btn btn-info" data-toggle="modal" ng-click="OpenWindow('app/pages/categories/createdlg.html', 'sm', 0)">Create New</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="OpenWindow('app/pages/categories/createdlg.html', 'sm', 0)">Create New</button>
     </div>
-    <table class="table table-striped tableCu animated fadeIn">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Id</th>
-          <th>Name</th>
-          <th>Credit</th>
-          <th>Created Date</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="category in categories">
-          <td>{{10 * currentPage + $index + 1}}</td>
-          <td>{{category.category_id}}</td>
-          <td>{{category.category_name}}</td>
-          <td>
-            <a href="#" name="editable" editable-text="category.category_credit" e-style="width:100px" onbeforesave="ChangeCredit(category.category_id, $data)">${{category.category_credit / 100}}</a>
-          </td>
-          <td>{{category.created_timestamp.substr(0, 10)}}</td>
-          <td>
-            <button type="button" class="btn btn-primary badge btn-sq" data-toggle="modal" ng-click="OpenWindow('app/pages/categories/renamedlg.html', 'sm', $index)">
-              <i class="glyphicon glyphicon-pencil"/>
-            </button>
-            <button class="btn btn-danger badge btn-sq" ng-click="GoDelete($index);">
-              <i class="glyphicon glyphicon-trash"/>
-            </button></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="panel panel-primary">
+      <div class="panel-heading"><strong>Categories</strong></div>
+      <div class="panel-body">
+        <table class="table tableCu animated fadeIn">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Credit</th>
+              <th>Created Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="category in categories">
+              <td>{{10 * currentPage + $index + 1}}</td>
+              <td>{{category.category_id}}</td>
+              <td>{{category.category_name}}</td>
+              <td>
+                <a href="#" name="editable" editable-text="category.category_credit" e-style="width:100px" onbeforesave="ChangeCredit(category.category_id, $data)">${{category.category_credit / 100}}</a>
+              </td>
+              <td>{{category.created_timestamp.substr(0, 10)}}</td>
+              <td>
+                <button type="button" class="btn btn-primary badge btn-sq" data-toggle="modal" ng-click="OpenWindow('app/pages/categories/renamedlg.html', 'sm', $index)">
+                  <i class="glyphicon glyphicon-pencil"/>
+                </button>
+                <button class="btn btn-danger badge btn-sq" ng-click="GoDelete($index);">
+                  <i class="glyphicon glyphicon-trash"/>
+                </button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col col-md-8">Page {{currentPage + 1}} of {{(total+9)/10 | floor}}</div>
+          <div class="col col-md-4">
+            <div paging page="currentPage+1" page-size="10" total="total" show-prev-next="true" show-first-last="true" paging-action="OnPage(page-1)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <br>
     <div class="form-group" style="text-align: center">
       Premium price:   <a href="#" name="editable" editable-text="premium_price" e-style="width:100px" onbeforesave="ChangePremium($data)">${{premium_price / 100}}</a>

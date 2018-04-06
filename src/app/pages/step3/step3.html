@@ -1,9 +1,20 @@
 <div class="auth-main" ng-controller="Step3Controller">
   <div class="auth-full">
-    <div class="row" style="margin-bottom:40px">
-      <div class="col-md-offset-1 col-md-3 label-default" style="text-align:center;margin-right:5px;padding:10px;color:lightgrey" ng-click="">Step 1: Ad Information</div>
-      <div class="col-md-3 label-default" style="text-align:center;margin-right:5px;padding:10px;color:lightgrey" ng-click="">Step 2: Preview Post</div>
-      <div class="col-md-3 label-info" style="text-align:center;margin-right:5px;padding:10px;color:white" ng-click="">Step 3: Payment</div>
+    <div class="stepwizard">
+      <div class="stepwizard-row">
+        <div class="stepwizard-step">
+          <button type="button" class="btn btn-secondary btn-circle" disabled="disabled">1</button>
+          <p>Step 1: AD Information</p>
+        </div>
+        <div class="stepwizard-step">
+          <button type="button" class="btn btn-secondary btn-circle" disabled="disabled">2</button>
+          <p>Step 2: Preview</p>
+        </div>
+        <div class="stepwizard-step">
+          <button type="button" class="btn btn-primary btn-circle">3</button>
+          <p>Step 3: Payment</p>
+        </div>
+      </div>
     </div>
     <h1>{{ad.state_name}} > {{ad.city_name}} > {{ad.category_name}}</h1>
     <div class="col-md-offset-3 col-md-6 animated fadeIn">
@@ -23,12 +34,12 @@
         <center>
           <!--<h5>Credit Card Information</h5>
           <span>Card Number</span>-->
-          <img src="">
+          <!-- <img src=""> -->
         </center>
       </div>
       <div class="form-group">
-        <div class="row">
-          <button type="submit" class="btn btn-info btn-auth" ng-click="OnOK()">Complete</button>
+        <div class="row" style="text-align:center">
+          <button type="submit" class="btn btn-primary" id="btnComplete" ng-click="OnOK()">Complete</button>
         </div>
       </div>
     </div>

@@ -32,3 +32,8 @@ gulp.task('upload', function () {
 gulp.task('default', ['clean'], function () {
   gulp.start('build');
 });
+
+// steps for remote upload 
+// gulp
+// gulp remote
+// gulp upload

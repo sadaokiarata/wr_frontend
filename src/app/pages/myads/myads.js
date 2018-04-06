@@ -16,7 +16,7 @@
         },
       });
   }
-  function MyAdsController($scope, $window, $location, $http, $rootScope, toastr) {
+  function MyAdsController($scope, $window, $location, $http, $rootScope, toastr, $uibModal) {
     $scope.OnPage = function (page) {
       if (page != -1)
         $scope.currentPage = page;
@@ -41,7 +41,7 @@
           $scope.result = response.data.err;
       });
     }
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     $scope.currentPage = 0;
     if (user == null || user == undefined) {
       console.log("login needed1");
@@ -86,6 +86,15 @@
           toastr.error(response.data.err, "Delete");
       });
     }
+    $scope.OpenWindow = function(page, size, id) {   //=0
+      $scope.selectedId = id;
+      $uibModal.open({
+        animation: true,
+        templateUrl: page,
+        size: size,
+        scope: $scope,
+      });
+    };
     $scope.GoView = function (ad_id) {
       $rootScope.selectedId = $scope.ads[ad_id].post_id;
       $location.path("/view/" + $rootScope.selectedId);   //$location.path("/view/-1");

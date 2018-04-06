@@ -20,9 +20,10 @@
         padding-top: 1px;
       }
       & > td {
-        padding: 0px 8px;
-        line-height: 35px;
+        padding: 10px 4px 10px;
+        line-height: 15px;
         border-top: 1px solid $border-light;
+        font-size: 15px;
         &:first-child {
           text-align: center;
         }
@@ -280,6 +281,8 @@ input.search-input {
 
 th {
   font-weight: $font-normal;
+  color: black;
+  font-weight: bold;
 }
 
 .editable-empty {
@@ -290,7 +293,7 @@ th {
   border: none;
 }
 .tableCu > thead > tr > th {
-  background-color: rgba(45,172,209,1);
+  /*background-color: rgba(51,122,183,1);*/
   height: 50px;
 }
 
@@ -322,7 +325,6 @@ th {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-  background-color: $info;
   border-color: $border;
 }
 

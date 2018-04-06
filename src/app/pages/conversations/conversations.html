@@ -1,31 +1,38 @@
 <div class="auth-main" ng-controller="ConversationsController">
   <div class="auth-full">
-    <div class="form-group">
-      <div paging page="currentPage+1" page-size="10" total="total" style="text-align:center"
-          show-prev-next="true" show-first-last="true" paging-action="OnPage(page-1)"></div>
+    <div class="panel panel-primary">
+      <div class="panel-heading"><strong>Messages</strong></div>
+      <div class="panel-body">
+        <table class="table tableCu animated fadeIn">
+          <thead>
+            <tr>
+              <!-- <th>#</th> -->
+              <th>Title</th>
+              <th></th>
+              <th>Message Time</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="conv in convs">
+              <!-- <td>{{10 * currentPage + $index + 1}}</td> -->
+              <td>{{conv.post_title}}</td>
+              <td><div ng-if="conv.unread" style="color:red;font-weight:bold">(New message)</div></td>
+              <td><span am-time-ago="{{conv.ti}}"></span></td>
+              <td><a href="/#/view/{{conv.post_id}}#messagebox">View</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col col-md-8">Page {{currentPage + 1}} of {{(convs.length+9)/10 | floor}}</div>
+          <div class="col col-md-4">
+            <div paging page="currentPage+1" page-size="10" total="convs.length" show-prev-next="true" show-first-last="true" paging-action="OnPage(page-1)"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-group" style="text-align: center">
-      Total: {{convs.length}}
-    </div>
-    <table class="table table-striped tableCu animated fadeIn">
-      <thead>
-        <tr>
-          <!-- <th>#</th> -->
-          <th>Title</th>
-          <th></th>
-          <th>Message Time</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="conv in convs">
-          <!-- <td>{{10 * currentPage + $index + 1}}</td> -->
-          <td>{{conv.post_title}}</td>
-          <td><div ng-if="conv.unread" style="color:red;font-weight:bold">(New message)</div></td>
-          <td><span am-time-ago="{{conv.ti}}"></span></td>
-          <td><a href="/#/view/{{conv.post_id}}">Open ad</a></td>
-        </tr>
-      </tbody>
-    </table>
+    
   </div>
 </div>

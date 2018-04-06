@@ -29,7 +29,7 @@
     $rootScope.ad.premium_period = "1";
     $rootScope.ad.premium_interval = "1";
     $rootScope.ad.movetotop_times = "1";
-    var user = JSON.parse($window.sessionStorage.getItem("user"));
+    var user = JSON.parse($window.localStorage.getItem("user"));
     $scope.premium_price = user.premium_price;
     if (user == null || user == undefined) {
       console.log("login needed1");
@@ -172,7 +172,7 @@
         toastr.warning("Input post desc with longer than 3 chars", "Warning");
         return;
       }
-      if ($rootScope.ad.phone == undefined || $rootScope.ad.phone.length < 6 || !$rootScope.ad.phone.match(/^[0-9\-\+]+$/)) {
+      if ($rootScope.ad.phone != undefined && $rootScope.ad.phone.length > 0 && ($rootScope.ad.phone.length < 6 || !$rootScope.ad.phone.match(/^[0-9\-\+]+$/))) {
         $('body').animate({ scrollTop: 0 }, 2000);
         toastr.warning("Phone number is invalid", "Warning");
         return;
