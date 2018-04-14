@@ -123,7 +123,7 @@
         url: 'https://localhost:3009/locations',
       }).then(function (response) {
         $scope.locations = response.data.locations;
-        $scope.mine = response.data.mine;
+        //$scope.mine = response.data.mine;
         if ($stateParams.state_cityName == undefined || $stateParams.state_cityName == '') {
           $scope.GotoCorrect();
         } else {
