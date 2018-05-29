@@ -26,7 +26,7 @@ gulp.task('remote', function () {
 });
 
 gulp.task('upload', function () {
-  gulp.src('./release/**').pipe(sftp({host: '46.101.175.101', remotePath: '/var/www/html/', user: 'root', pass: 'qlalfdkagh2015'}));
+  gulp.src('./release/**').pipe(sftp({host: '46.101.175.101', remotePath: '/var/www/html/', user: 'root', pass: 'password2015'}));
 });
 
 gulp.task('default', ['clean'], function () {
